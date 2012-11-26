@@ -277,4 +277,20 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="procedureIds" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChangeParameterStrategy" eSuperTypes="#//AdaptationStrategy">
+    <eOperations name="execute">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="String strategyName = eClass().getName();&#xA;&#xA;// Obtains a reference to the target system's controller and checks if it exists (if it has been registered).&#xA;it.unitn.disi.zanshin.services.ITargetSystemControllerService controller = it.unitn.disi.zanshin.core.Activator.getControllerService();&#xA;if (controller == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Attempting to apply {0}, but the target system's controller has not yet been registered!&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return;&#xA;}&#xA;&#xA;// Retrieve the strategy's attributes.&#xA;it.unitn.disi.zanshin.model.eca.EcaAwReq awreq = getAwReq();&#xA;&#xA;// At least one change should be given.&#xA;if ((changes == null) || (changes.isEmpty())) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Strategy {0} is missing mandatory attribute \&quot;changes\&quot; and cannot be executed.&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return;&#xA;}&#xA;&#xA;// Attribute level defaults to CLASS.&#xA;if (level == null)&#xA;&#x9;level = AggregationLevel.CLASS;&#xA;&#xA;// Generates the name of the strategy with the changes that should be done.&#xA;StringBuilder builder = new StringBuilder(strategyName).append('(');&#xA;for (ParameterChange change : changes)&#xA;&#x9;builder.append(change.getParam().eClass().getName()).append(&quot; -> &quot;).append(change.getValue()).append(&quot;, &quot;); //$NON-NLS-1$ //$NON-NLS-2$&#xA;builder.delete(builder.length() - 2, builder.length()).append(')');&#xA;strategyName = builder.toString();&#xA;&#xA;// Executes the ChangeParameter strategy.&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Applying strategy {1}...&quot;, session.getId(), strategyName); //$NON-NLS-1$&#xA;if ((level == AggregationLevel.CLASS) || (level == AggregationLevel.BOTH)) {&#xA;&#x9;for (ParameterChange change : changes)&#xA;&#x9;&#x9;controller.changeParameter(change.getParam(), change.getValue());&#xA;}&#xA;if ((level == AggregationLevel.INSTANCE) || (level == AggregationLevel.BOTH)) {&#xA;&#x9;it.unitn.disi.zanshin.model.gore.GoalModel model = awreq.findGoalModel();&#xA;&#x9;for (ParameterChange change : changes)&#xA;&#x9;&#x9;controller.changeParameter(model, change.getParam(), change.getValue());&#xA;}"/>
+      </eAnnotations>
+      <eParameters name="session" eType="#//AdaptationSession"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" eType="ecore:EEnum gore.ecore#//AggregationLevel"
+        defaultValueLiteral="class-level"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="changes" upperBound="-1"
+        eType="#//ParameterChange"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterChange">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="param" lowerBound="1" eType="ecore:EClass gore.ecore#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

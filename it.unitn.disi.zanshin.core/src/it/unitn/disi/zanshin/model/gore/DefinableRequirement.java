@@ -85,7 +85,7 @@ public interface DefinableRequirement extends Requirement {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement started: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\nsetState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.STARTED);\nit.unitn.disi.zanshin.model.gore.Requirement parent = getParent();\nif ((parent != null) && (parent instanceof DefinableRequirement) && (((DefinableRequirement) parent).getState() == it.unitn.disi.zanshin.model.gore.DefinableRequirementState.UNDEFINED))\n\t((DefinableRequirement) parent).start();'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement started: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\nsetState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.STARTED);\n\n// If the monitoring service is active, warn it that this requirement has been started.\nit.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();\nif (monitoringService != null)\n\tmonitoringService.monitorMethodCall(this, MonitorableMethod.START);\n\n// Propagate the start to the parent.\nit.unitn.disi.zanshin.model.gore.Requirement parent = getParent();\nif ((parent != null) && (parent instanceof DefinableRequirement) && (((DefinableRequirement) parent).getState() == it.unitn.disi.zanshin.model.gore.DefinableRequirementState.UNDEFINED))\n\t((DefinableRequirement) parent).start();'"
 	 * @generated
 	 */
 	void start();
@@ -94,7 +94,7 @@ public interface DefinableRequirement extends Requirement {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement ended: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement ended: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\n\n// If the monitoring service is active, warn it that this requirement has ended.\nit.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();\nif (monitoringService != null)\n\tmonitoringService.monitorMethodCall(this, MonitorableMethod.END);\n'"
 	 * @generated
 	 */
 	void end();
@@ -103,7 +103,7 @@ public interface DefinableRequirement extends Requirement {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement succeeded: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\nsetState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.SUCCEEDED);\nend();\nit.unitn.disi.zanshin.model.gore.Requirement parent = getParent();\nif ((parent != null) && (parent instanceof DefinableRequirement)) {\n\tif (parent.getRefinementType() == it.unitn.disi.zanshin.model.gore.RefinementType.OR) ((DefinableRequirement) parent).success();\n\telse ((DefinableRequirement)parent).checkState();\n}'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement succeeded: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\nsetState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.SUCCEEDED);\n\n// If the monitoring service is active, warn it that this requirement has been successful.\nit.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();\nif (monitoringService != null)\n\tmonitoringService.monitorMethodCall(this, MonitorableMethod.SUCCESS);\n\n// If the requirement is successful, then it has also ended.\nend();\n\n// Propagate the success to the parent, depending on the type of refinement.\nit.unitn.disi.zanshin.model.gore.Requirement parent = getParent();\nif ((parent != null) && (parent instanceof DefinableRequirement)) {\n\tif (parent.getRefinementType() == it.unitn.disi.zanshin.model.gore.RefinementType.OR) ((DefinableRequirement) parent).success();\n\telse ((DefinableRequirement)parent).checkState();\n}'"
 	 * @generated
 	 */
 	void success();
@@ -112,7 +112,7 @@ public interface DefinableRequirement extends Requirement {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement failed: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\nsetState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.FAILED);\nend();\nit.unitn.disi.zanshin.model.gore.Requirement parent = getParent();\nif ((parent != null) && (parent instanceof DefinableRequirement)) {\n\tif (parent.getRefinementType() == it.unitn.disi.zanshin.model.gore.RefinementType.AND) ((DefinableRequirement) parent).fail();\n\telse ((DefinableRequirement)parent).checkState();\n}'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='it.unitn.disi.zanshin.core.CoreUtils.log.debug(\"Requirement failed: \" + eClass().getName() + \" (\" + this + \")\"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$\nsetState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.FAILED);\n\n// If the monitoring service is active, warn it that this requirement has failed.\nit.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();\nif (monitoringService != null)\n\tmonitoringService.monitorMethodCall(this, MonitorableMethod.FAIL);\n\t\n// If the requirement failed, then it has also ended.\nend();\n\n// Propagate the failure to the parent, depending on the type of refinement.\nit.unitn.disi.zanshin.model.gore.Requirement parent = getParent();\nif ((parent != null) && (parent instanceof DefinableRequirement)) {\n\tif (parent.getRefinementType() == it.unitn.disi.zanshin.model.gore.RefinementType.AND) ((DefinableRequirement) parent).fail();\n\telse ((DefinableRequirement)parent).checkState();\n}'"
 	 * @generated
 	 */
 	void fail();

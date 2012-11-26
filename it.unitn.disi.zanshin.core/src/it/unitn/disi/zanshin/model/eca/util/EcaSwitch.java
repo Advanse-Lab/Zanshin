@@ -12,6 +12,7 @@ import it.unitn.disi.zanshin.model.eca.AdaptationStrategy;
 import it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ApplicabilityCondition;
+import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaPackage;
@@ -19,6 +20,7 @@ import it.unitn.disi.zanshin.model.eca.Event;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
@@ -298,6 +300,22 @@ public class EcaSwitch<T> extends Switch<T> {
 			T result = caseReconfigurationStrategy(reconfigurationStrategy);
 			if (result == null)
 				result = caseAdaptationStrategy(reconfigurationStrategy);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcaPackage.CHANGE_PARAMETER_STRATEGY: {
+			ChangeParameterStrategy changeParameterStrategy = (ChangeParameterStrategy) theEObject;
+			T result = caseChangeParameterStrategy(changeParameterStrategy);
+			if (result == null)
+				result = caseAdaptationStrategy(changeParameterStrategy);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcaPackage.PARAMETER_CHANGE: {
+			ParameterChange parameterChange = (ParameterChange) theEObject;
+			T result = caseParameterChange(parameterChange);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -583,6 +601,35 @@ public class EcaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReconfigurationStrategy(ReconfigurationStrategy object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Change Parameter Strategy</em>'. <!--
+	 * begin-user-doc --> This implementation returns null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Change Parameter Strategy</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseChangeParameterStrategy(ChangeParameterStrategy object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Change</em>'. <!-- begin-user-doc
+	 * --> This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Change</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterChange(ParameterChange object) {
 		return null;
 	}
 

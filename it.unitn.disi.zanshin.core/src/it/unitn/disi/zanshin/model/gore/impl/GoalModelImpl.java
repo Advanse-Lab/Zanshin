@@ -319,16 +319,16 @@ public class GoalModelImpl extends EObjectImpl implements GoalModel {
 	public DifferentialRelation filterRelations(AwReq indicator, Parameter parameter, String value) {
 		// Filters the relations by indicator and parameter.
 		EList<DifferentialRelation> filteredRelations = filterRelations(indicator, parameter);
-
+		
 		// Creates a fake parameter for the value comparison.
 		it.unitn.disi.zanshin.model.gore.Parameter param = parameter.createCopy();
 		param.setValue(value);
-
-		// Looks for a relation in which value is within bounds. Returns the first one found.
+		
+		// Looks for a relation in which a param with this value is incrementable. Returns the first one found.
 		for (DifferentialRelation relation : filteredRelations)
-			if (param.withinBoundsOf(relation))
+			if (param.incrementableIn(relation))
 				return relation;
-
+		
 		// If not found, return null.
 		return null;
 	}

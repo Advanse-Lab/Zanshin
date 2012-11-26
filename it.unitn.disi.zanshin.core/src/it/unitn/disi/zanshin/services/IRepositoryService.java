@@ -1,10 +1,10 @@
 package it.unitn.disi.zanshin.services;
 
-import java.util.Set;
-
 import it.unitn.disi.zanshin.model.gore.AwReq;
 import it.unitn.disi.zanshin.model.gore.GoalModel;
 import it.unitn.disi.zanshin.model.gore.Requirement;
+
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 

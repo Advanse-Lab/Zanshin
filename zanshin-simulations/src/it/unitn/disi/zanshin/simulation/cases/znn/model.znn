@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<znn:ZnnGoalModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eca="http://disi.unitn.it/zanshin/1.0/eca" xmlns:znn="http://disi.unitn.it/zanshin/1.0/znn">
+  <rootGoal xsi:type="znn:G_ServeNews">
+    <children xsi:type="znn:T_TextOnly"/>
+    <children xsi:type="znn:T_Multimedia" />
+
+	<!-- Softgoals -->
+    <children xsi:type="znn:S_CostEfficiency" constraints="//@rootGoal/@children.5"/>	<!-- //@rootGoal/@children.2 -->
+    <children xsi:type="znn:S_FastResponse" constraints="//@rootGoal/@children.6"/>
+    <children xsi:type="znn:S_HiFi" constraints="//@rootGoal/@children.7"/>
+
+	<!-- Quality Constraints -->
+    <children xsi:type="znn:Q_SingleServer" softgoal="//@rootGoal/@children.2"/>		<!-- //@rootGoal/@children.5 -->
+    <children xsi:type="znn:Q_RespTimeUnderMax" softgoal="//@rootGoal/@children.3"/>
+    <children xsi:type="znn:Q_Multimedia" softgoal="//@rootGoal/@children.4"/>
+
+	<!-- AwReqs -->
+    <children xsi:type="znn:AR1" target="//@rootGoal/@children.5">						<!-- //@rootGoal/@children.8 -->
+      <condition xsi:type="eca:ReconfigurationResolutionCondition"/>
+      <strategies xsi:type="eca:ReconfigurationStrategy" algorithmId="qualia">
+        <condition xsi:type="eca:ReconfigurationApplicabilityCondition"/>
+      </strategies>
+    </children>
+    <children xsi:type="znn:AR2" target="//@rootGoal/@children.6">
+      <condition xsi:type="eca:ReconfigurationResolutionCondition"/>
+      <strategies xsi:type="eca:ReconfigurationStrategy" algorithmId="qualia">
+        <condition xsi:type="eca:ReconfigurationApplicabilityCondition"/>
+      </strategies>
+      <strategies xsi:type="eca:ChangeParameterStrategy">
+      	<changes xsi:type="eca:ParameterChange" param="//@configuration/@parameters.1" value="T_TextOnly"/>
+        <condition xsi:type="eca:SimpleApplicabilityCondition"/>
+      </strategies>
+    </children>
+    <children xsi:type="znn:AR3" target="//@rootGoal/@children.7">
+      <condition xsi:type="eca:SimpleResolutionCondition"/>
+      <strategies xsi:type="eca:ChangeParameterStrategy">
+      	<changes xsi:type="eca:ParameterChange" param="//@configuration/@parameters.1" value="T_Multimedia"/>
+        <condition xsi:type="eca:SimpleApplicabilityCondition"/>
+      </strategies>
+    </children>
+  </rootGoal>
+  
+  <!-- Parameters and relations. -->
+  <configuration>
+    <parameters xsi:type="znn:CV_NoS" unit="1" value="1" metric="integer"/>
+    <parameters xsi:type="znn:VP1" type="vp"/>
+  </configuration>
+  <relations indicator="//@rootGoal/@children.8" parameter="//@configuration/@parameters.0" lowerBound="1" upperBound="3" operator="ft"/>
+  <relations indicator="//@rootGoal/@children.9" parameter="//@configuration/@parameters.0" lowerBound="1" upperBound="3" operator="gt"/>
+</znn:ZnnGoalModel>

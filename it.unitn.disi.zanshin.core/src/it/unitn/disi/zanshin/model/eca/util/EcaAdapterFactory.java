@@ -12,6 +12,7 @@ import it.unitn.disi.zanshin.model.eca.AdaptationStrategy;
 import it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ApplicabilityCondition;
+import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaPackage;
@@ -19,6 +20,7 @@ import it.unitn.disi.zanshin.model.eca.Event;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
@@ -206,6 +208,16 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseReconfigurationStrategy(ReconfigurationStrategy object) {
 			return createReconfigurationStrategyAdapter();
+		}
+
+		@Override
+		public Adapter caseChangeParameterStrategy(ChangeParameterStrategy object) {
+			return createChangeParameterStrategyAdapter();
+		}
+
+		@Override
+		public Adapter caseParameterChange(ParameterChange object) {
+			return createParameterChangeAdapter();
 		}
 
 		@Override
@@ -509,6 +521,33 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReconfigurationStrategyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy
+	 * <em>Change Parameter Strategy</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we
+	 * can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy
+	 * @generated
+	 */
+	public Adapter createChangeParameterStrategyAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.zanshin.model.eca.ParameterChange
+	 * <em>Parameter Change</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can easily
+	 * ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.ParameterChange
+	 * @generated
+	 */
+	public Adapter createParameterChangeAdapter() {
 		return null;
 	}
 

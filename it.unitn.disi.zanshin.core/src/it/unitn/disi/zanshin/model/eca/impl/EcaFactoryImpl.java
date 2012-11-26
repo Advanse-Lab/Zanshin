@@ -10,6 +10,7 @@ import it.unitn.disi.zanshin.model.eca.AbortStrategy;
 import it.unitn.disi.zanshin.model.eca.AdaptationSession;
 import it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaFactory;
@@ -18,6 +19,7 @@ import it.unitn.disi.zanshin.model.eca.Event;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
@@ -117,6 +119,10 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 			return createReconfigurationResolutionCondition();
 		case EcaPackage.RECONFIGURATION_STRATEGY:
 			return createReconfigurationStrategy();
+		case EcaPackage.CHANGE_PARAMETER_STRATEGY:
+			return createChangeParameterStrategy();
+		case EcaPackage.PARAMETER_CHANGE:
+			return createParameterChange();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -280,6 +286,26 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 	public ReconfigurationStrategy createReconfigurationStrategy() {
 		ReconfigurationStrategyImpl reconfigurationStrategy = new ReconfigurationStrategyImpl();
 		return reconfigurationStrategy;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ChangeParameterStrategy createChangeParameterStrategy() {
+		ChangeParameterStrategyImpl changeParameterStrategy = new ChangeParameterStrategyImpl();
+		return changeParameterStrategy;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public ParameterChange createParameterChange() {
+		ParameterChangeImpl parameterChange = new ParameterChangeImpl();
+		return parameterChange;
 	}
 
 	/**

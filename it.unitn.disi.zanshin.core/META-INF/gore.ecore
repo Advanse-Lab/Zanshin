@@ -178,7 +178,7 @@
     </eOperations>
     <eOperations name="filterRelations" eType="#//DifferentialRelation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="// Filters the relations by indicator and parameter.&#xA;EList&lt;DifferentialRelation> filteredRelations = filterRelations(indicator, parameter);&#xA;&#xA;// Creates a fake parameter for the value comparison.&#xA;it.unitn.disi.zanshin.model.gore.Parameter param = parameter.createCopy();&#xA;param.setValue(value);&#xA;&#xA;// Looks for a relation in which value is within bounds. Returns the first one found.&#xA;for (DifferentialRelation relation : filteredRelations) &#xA;&#x9;if (param.withinBoundsOf(relation))&#xA;&#x9;&#x9;return relation;&#xA;&#xA;// If not found, return null.&#xA;return null;"/>
+        <details key="body" value="// Filters the relations by indicator and parameter.&#xA;EList&lt;DifferentialRelation> filteredRelations = filterRelations(indicator, parameter);&#xA;&#xA;// Creates a fake parameter for the value comparison.&#xA;it.unitn.disi.zanshin.model.gore.Parameter param = parameter.createCopy();&#xA;param.setValue(value);&#xA;&#xA;// Looks for a relation in which a param with this value is incrementable. Returns the first one found.&#xA;for (DifferentialRelation relation : filteredRelations)&#xA;&#x9;if (param.incrementableIn(relation))&#xA;&#x9;&#x9;return relation;&#xA;&#xA;// If not found, return null.&#xA;return null;"/>
       </eAnnotations>
       <eParameters name="indicator" eType="#//AwReq"/>
       <eParameters name="parameter" eType="#//Parameter"/>
@@ -241,7 +241,7 @@
     </eOperations>
     <eOperations name="withinBoundsOf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="String lowerBound = relation.getLowerBound();&#xA;String upperBound = relation.getUpperBound();&#xA;&#xA;// Checks for null comparisons.&#xA;Boolean lowerCmp = greaterThan(lowerBound);&#xA;Boolean upperCmp = fewerThan(upperBound);&#xA;if ((lowerBound != null) &amp;&amp; (lowerCmp == null)) return null;&#xA;if ((upperBound != null) &amp;&amp; (upperCmp == null)) return null;&#xA;&#xA;// Does the comparisons, but only if needed. When the bounds are null, they mean infinity.&#xA;return (((lowerBound == null) || lowerCmp) &amp;&amp; ((upperBound == null) || upperCmp));"/>
+        <details key="body" value="String lowerBound = relation.getLowerBound();&#xA;String upperBound = relation.getUpperBound();&#xA;&#xA;// Checks for null comparisons.&#xA;Boolean lowerCmp = greaterThan(lowerBound);&#xA;Boolean upperCmp = fewerThan(upperBound);&#xA;Boolean lowerEqual = equalTo(lowerBound);&#xA;Boolean upperEqual = equalTo(upperBound);&#xA;if ((lowerBound != null) &amp;&amp; ((lowerCmp == null) || (lowerEqual == null))) return null;&#xA;if ((upperBound != null) &amp;&amp; ((upperCmp == null) || (upperEqual == null))) return null;&#xA;&#xA;// Does the comparisons, but only if needed. When the bounds are null, they mean infinity.&#xA;return (((lowerBound == null) || (lowerCmp || lowerEqual)) &amp;&amp; ((upperBound == null) || (upperCmp || upperEqual)));"/>
       </eAnnotations>
       <eParameters name="relation" eType="#//DifferentialRelation"/>
     </eOperations>
@@ -253,7 +253,7 @@
     </eOperations>
     <eOperations name="createCopy" eType="#//Parameter">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="org.eclipse.emf.ecore.util.EcoreUtil.Copier copier = new org.eclipse.emf.ecore.util.EcoreUtil.Copier();&#xA;Parameter copy = (Parameter) copier.copy(this);&#xA;return copy;"/>
+        <details key="body" value="return (Parameter) org.eclipse.emf.ecore.util.EcoreUtil.copy(this);"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="increment">

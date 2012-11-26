@@ -144,9 +144,9 @@ public class RMITargetSystemControllerService implements ITargetSystemController
 
 	/** @see it.unitn.disi.zanshin.services.ITargetSystemControllerService#changeParameter(it.unitn.disi.zanshin.model.gore.GoalModel, it.unitn.disi.zanshin.model.gore.Requirement, it.unitn.disi.zanshin.model.gore.Parameter, java.lang.String) */
 	@Override
-	public void changeParameter(GoalModel model, Requirement req, Parameter param, String value) {
+	public void changeParameter(GoalModel model, Parameter param, String value) {
 		String paramName = param.eClass().getName();
-		ControllerUtils.log.debug("RMI Target System Controller forwarding instruction: change-parameter(i{0}, {1}, {2})", req.eClass().getName(), paramName, value); //$NON-NLS-1$
+		ControllerUtils.log.debug("RMI Target System Controller forwarding instruction: change-parameter({0}, {1})", paramName, value); //$NON-NLS-1$
 
 		// Retrieves the session id and a reference to the target system responsible for this requirement instance.
 		Long sessionId = model.getId();
@@ -161,17 +161,14 @@ public class RMITargetSystemControllerService implements ITargetSystemController
 		}
 	}
 
-	/**
-	 * @see it.unitn.disi.zanshin.services.ITargetSystemControllerService#changeParameter(org.eclipse.emf.ecore.EClass,
-	 *      it.unitn.disi.zanshin.model.gore.Parameter, java.lang.String)
-	 */
+	/** @see it.unitn.disi.zanshin.services.ITargetSystemControllerService#changeParameter(it.unitn.disi.zanshin.model.gore.Parameter, java.lang.String) */
 	@Override
-	public void changeParameter(EClass reqClass, Parameter param, String value) {
+	public void changeParameter(Parameter param, String value) {
 		String paramName = param.eClass().getName();
-		ControllerUtils.log.debug("RMI Target System Controller forwarding instruction: change-parameter({0}, {1}, {2})", reqClass.getName(), paramName, value); //$NON-NLS-1$
+		ControllerUtils.log.debug("RMI Target System Controller forwarding instruction: change-parameter({0}, {1})", paramName, value); //$NON-NLS-1$
 
 		// Retrieves a reference to the target system responsible for this requirement instance.
-		ITargetSystem targetSystem = retrieveTargetSystem(reqClass);
+		ITargetSystem targetSystem = retrieveTargetSystem(param.eClass());
 
 		// Sends the instruction to the target system.
 		try {

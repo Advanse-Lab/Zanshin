@@ -12,6 +12,7 @@ import it.unitn.disi.zanshin.model.eca.AdaptationStrategy;
 import it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ApplicabilityCondition;
+import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaFactory;
@@ -20,6 +21,7 @@ import it.unitn.disi.zanshin.model.eca.Event;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
@@ -182,6 +184,20 @@ public class EcaPackageImpl extends EPackageImpl implements EcaPackage {
 	 * @generated
 	 */
 	private EClass reconfigurationStrategyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass changeParameterStrategyEClass = null;
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	private EClass parameterChangeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -750,6 +766,60 @@ public class EcaPackageImpl extends EPackageImpl implements EcaPackage {
 	 * 
 	 * @generated
 	 */
+	public EClass getChangeParameterStrategy() {
+		return changeParameterStrategyEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getChangeParameterStrategy_Level() {
+		return (EAttribute) changeParameterStrategyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getChangeParameterStrategy_Changes() {
+		return (EReference) changeParameterStrategyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EClass getParameterChange() {
+		return parameterChangeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EReference getParameterChange_Param() {
+		return (EReference) parameterChangeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public EAttribute getParameterChange_Value() {
+		return (EAttribute) parameterChangeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public EClass getReconfigurationApplicabilityCondition() {
 		return reconfigurationApplicabilityConditionEClass;
 	}
@@ -987,6 +1057,14 @@ public class EcaPackageImpl extends EPackageImpl implements EcaPackage {
 		createEAttribute(reconfigurationStrategyEClass, RECONFIGURATION_STRATEGY__ALGORITHM_ID);
 		createEAttribute(reconfigurationStrategyEClass, RECONFIGURATION_STRATEGY__LEVEL);
 		createEAttribute(reconfigurationStrategyEClass, RECONFIGURATION_STRATEGY__PROCEDURE_IDS);
+
+		changeParameterStrategyEClass = createEClass(CHANGE_PARAMETER_STRATEGY);
+		createEAttribute(changeParameterStrategyEClass, CHANGE_PARAMETER_STRATEGY__LEVEL);
+		createEReference(changeParameterStrategyEClass, CHANGE_PARAMETER_STRATEGY__CHANGES);
+
+		parameterChangeEClass = createEClass(PARAMETER_CHANGE);
+		createEReference(parameterChangeEClass, PARAMETER_CHANGE__PARAM);
+		createEAttribute(parameterChangeEClass, PARAMETER_CHANGE__VALUE);
 	}
 
 	/**
@@ -1039,6 +1117,7 @@ public class EcaPackageImpl extends EPackageImpl implements EcaPackage {
 		reconfigurationApplicabilityConditionEClass.getESuperTypes().add(this.getApplicabilityCondition());
 		reconfigurationResolutionConditionEClass.getESuperTypes().add(this.getResolutionCondition());
 		reconfigurationStrategyEClass.getESuperTypes().add(this.getAdaptationStrategy());
+		changeParameterStrategyEClass.getESuperTypes().add(this.getAdaptationStrategy());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(ecaAwReqEClass, EcaAwReq.class, "EcaAwReq", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
@@ -1210,6 +1289,17 @@ public class EcaPackageImpl extends EPackageImpl implements EcaPackage {
 
 		op = addEOperation(reconfigurationStrategyEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 		addEParameter(op, this.getAdaptationSession(), "session", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(changeParameterStrategyEClass, ChangeParameterStrategy.class, "ChangeParameterStrategy", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEAttribute(getChangeParameterStrategy_Level(), theGorePackage.getAggregationLevel(), "level", "class-level", 0, 1, ChangeParameterStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEReference(getChangeParameterStrategy_Changes(), this.getParameterChange(), null, "changes", null, 0, -1, ChangeParameterStrategy.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		op = addEOperation(changeParameterStrategyEClass, null, "execute", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+		addEParameter(op, this.getAdaptationSession(), "session", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(parameterChangeEClass, ParameterChange.class, "ParameterChange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getParameterChange_Param(), theGorePackage.getParameter(), null, "param", null, 1, 1, ParameterChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEAttribute(getParameterChange_Value(), ecorePackage.getEString(), "value", null, 0, 1, ParameterChange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);

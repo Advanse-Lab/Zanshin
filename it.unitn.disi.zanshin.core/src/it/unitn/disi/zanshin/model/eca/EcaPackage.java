@@ -1149,6 +1149,93 @@ public interface EcaPackage extends EPackage {
 	int RECONFIGURATION_STRATEGY_FEATURE_COUNT = ADAPTATION_STRATEGY_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.ChangeParameterStrategyImpl
+	 * <em>Change Parameter Strategy</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.ChangeParameterStrategyImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getChangeParameterStrategy()
+	 * @generated
+	 */
+	int CHANGE_PARAMETER_STRATEGY = 24;
+
+	/**
+	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PARAMETER_STRATEGY__AW_REQ = ADAPTATION_STRATEGY__AW_REQ;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PARAMETER_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Level</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PARAMETER_STRATEGY__LEVEL = ADAPTATION_STRATEGY_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Changes</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PARAMETER_STRATEGY__CHANGES = ADAPTATION_STRATEGY_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Change Parameter Strategy</em>' class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PARAMETER_STRATEGY_FEATURE_COUNT = ADAPTATION_STRATEGY_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.ParameterChangeImpl
+	 * <em>Parameter Change</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.ParameterChangeImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getParameterChange()
+	 * @generated
+	 */
+	int PARAMETER_CHANGE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Param</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_CHANGE__PARAM = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_CHANGE__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>Parameter Change</em>' class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_CHANGE_FEATURE_COUNT = 2;
+
+	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.EcaAwReq <em>Aw Req</em>}'. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1709,6 +1796,71 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getReconfigurationStrategy_ProcedureIds();
+
+	/**
+	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy
+	 * <em>Change Parameter Strategy</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Change Parameter Strategy</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy
+	 * @generated
+	 */
+	EClass getChangeParameterStrategy();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy#getLevel
+	 * <em>Level</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Level</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy#getLevel()
+	 * @see #getChangeParameterStrategy()
+	 * @generated
+	 */
+	EAttribute getChangeParameterStrategy_Level();
+
+	/**
+	 * Returns the meta object for the reference list '
+	 * {@link it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy#getChanges <em>Changes</em>}'. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Changes</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy#getChanges()
+	 * @see #getChangeParameterStrategy()
+	 * @generated
+	 */
+	EReference getChangeParameterStrategy_Changes();
+
+	/**
+	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.ParameterChange
+	 * <em>Parameter Change</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Parameter Change</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ParameterChange
+	 * @generated
+	 */
+	EClass getParameterChange();
+
+	/**
+	 * Returns the meta object for the reference '{@link it.unitn.disi.zanshin.model.eca.ParameterChange#getParam
+	 * <em>Param</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Param</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ParameterChange#getParam()
+	 * @see #getParameterChange()
+	 * @generated
+	 */
+	EReference getParameterChange_Param();
+
+	/**
+	 * Returns the meta object for the attribute '{@link it.unitn.disi.zanshin.model.eca.ParameterChange#getValue
+	 * <em>Value</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ParameterChange#getValue()
+	 * @see #getParameterChange()
+	 * @generated
+	 */
+	EAttribute getParameterChange_Value();
 
 	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition
@@ -2333,6 +2485,58 @@ public interface EcaPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RECONFIGURATION_STRATEGY__PROCEDURE_IDS = eINSTANCE.getReconfigurationStrategy_ProcedureIds();
+
+		/**
+		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.ChangeParameterStrategyImpl
+		 * <em>Change Parameter Strategy</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.ChangeParameterStrategyImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getChangeParameterStrategy()
+		 * @generated
+		 */
+		EClass CHANGE_PARAMETER_STRATEGY = eINSTANCE.getChangeParameterStrategy();
+
+		/**
+		 * The meta object literal for the '<em><b>Level</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute CHANGE_PARAMETER_STRATEGY__LEVEL = eINSTANCE.getChangeParameterStrategy_Level();
+
+		/**
+		 * The meta object literal for the '<em><b>Changes</b></em>' reference list feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference CHANGE_PARAMETER_STRATEGY__CHANGES = eINSTANCE.getChangeParameterStrategy_Changes();
+
+		/**
+		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.ParameterChangeImpl
+		 * <em>Parameter Change</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.ParameterChangeImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getParameterChange()
+		 * @generated
+		 */
+		EClass PARAMETER_CHANGE = eINSTANCE.getParameterChange();
+
+		/**
+		 * The meta object literal for the '<em><b>Param</b></em>' reference feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference PARAMETER_CHANGE__PARAM = eINSTANCE.getParameterChange_Param();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute PARAMETER_CHANGE__VALUE = eINSTANCE.getParameterChange_Value();
 
 		/**
 		 * The meta object literal for the '

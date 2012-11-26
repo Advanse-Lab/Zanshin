@@ -455,17 +455,17 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	public Boolean withinBoundsOf(DifferentialRelation relation) {
 		String lowerBound = relation.getLowerBound();
 		String upperBound = relation.getUpperBound();
-
+		
 		// Checks for null comparisons.
 		Boolean lowerCmp = greaterThan(lowerBound);
 		Boolean upperCmp = fewerThan(upperBound);
-		if ((lowerBound != null) && (lowerCmp == null))
-			return null;
-		if ((upperBound != null) && (upperCmp == null))
-			return null;
-
+		Boolean lowerEqual = equalTo(lowerBound);
+		Boolean upperEqual = equalTo(upperBound);
+		if ((lowerBound != null) && ((lowerCmp == null) || (lowerEqual == null))) return null;
+		if ((upperBound != null) && ((upperCmp == null) || (upperEqual == null))) return null;
+		
 		// Does the comparisons, but only if needed. When the bounds are null, they mean infinity.
-		return (((lowerBound == null) || lowerCmp) && ((upperBound == null) || upperCmp));
+		return (((lowerBound == null) || (lowerCmp || lowerEqual)) && ((upperBound == null) || (upperCmp || upperEqual)));
 	}
 
 	/**
@@ -488,9 +488,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @generated
 	 */
 	public Parameter createCopy() {
-		org.eclipse.emf.ecore.util.EcoreUtil.Copier copier = new org.eclipse.emf.ecore.util.EcoreUtil.Copier();
-		Parameter copy = (Parameter) copier.copy(this);
-		return copy;
+		return (Parameter) org.eclipse.emf.ecore.util.EcoreUtil.copy(this);
 	}
 
 	/**

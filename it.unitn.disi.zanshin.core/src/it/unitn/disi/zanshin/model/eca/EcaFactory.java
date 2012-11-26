@@ -160,6 +160,22 @@ public interface EcaFactory extends EFactory {
 	ReconfigurationStrategy createReconfigurationStrategy();
 
 	/**
+	 * Returns a new object of class '<em>Change Parameter Strategy</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Change Parameter Strategy</em>'.
+	 * @generated
+	 */
+	ChangeParameterStrategy createChangeParameterStrategy();
+
+	/**
+	 * Returns a new object of class '<em>Parameter Change</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Parameter Change</em>'.
+	 * @generated
+	 */
+	ParameterChange createParameterChange();
+
+	/**
 	 * Returns a new object of class '<em>Reconfiguration Applicability Condition</em>'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 

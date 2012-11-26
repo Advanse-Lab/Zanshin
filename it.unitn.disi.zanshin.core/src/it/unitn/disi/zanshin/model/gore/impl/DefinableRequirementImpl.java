@@ -139,12 +139,12 @@ public class DefinableRequirementImpl extends RequirementImpl implements Definab
 	public void start() {
 		it.unitn.disi.zanshin.core.CoreUtils.log.debug("Requirement started: " + eClass().getName() + " (" + this + ")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		setState(it.unitn.disi.zanshin.model.gore.DefinableRequirementState.STARTED);
-		
+
 		// If the monitoring service is active, warn it that this requirement has been started.
 		it.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();
 		if (monitoringService != null)
 			monitoringService.monitorMethodCall(this, MonitorableMethod.START);
-		
+
 		// Propagate the start to the parent.
 		it.unitn.disi.zanshin.model.gore.Requirement parent = getParent();
 		if ((parent != null) && (parent instanceof DefinableRequirement) && (((DefinableRequirement) parent).getState() == it.unitn.disi.zanshin.model.gore.DefinableRequirementState.UNDEFINED))
@@ -158,11 +158,12 @@ public class DefinableRequirementImpl extends RequirementImpl implements Definab
 	 */
 	public void end() {
 		it.unitn.disi.zanshin.core.CoreUtils.log.debug("Requirement ended: " + eClass().getName() + " (" + this + ")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-		
+
 		// If the monitoring service is active, warn it that this requirement has ended.
 		it.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();
 		if (monitoringService != null)
 			monitoringService.monitorMethodCall(this, MonitorableMethod.END);
+
 	}
 
 	/**
@@ -178,7 +179,7 @@ public class DefinableRequirementImpl extends RequirementImpl implements Definab
 		it.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();
 		if (monitoringService != null)
 			monitoringService.monitorMethodCall(this, MonitorableMethod.SUCCESS);
-	
+
 		// If the requirement is successful, then it has also ended.
 		end();
 
@@ -204,7 +205,7 @@ public class DefinableRequirementImpl extends RequirementImpl implements Definab
 		it.unitn.disi.zanshin.services.IMonitoringService monitoringService = it.unitn.disi.zanshin.core.Activator.getMonitoringService();
 		if (monitoringService != null)
 			monitoringService.monitorMethodCall(this, MonitorableMethod.FAIL);
-	
+
 		// If the requirement failed, then it has also ended.
 		end();
 

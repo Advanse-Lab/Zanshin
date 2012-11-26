@@ -53,27 +53,23 @@ public interface ITargetSystemControllerService {
 	 * 
 	 * @param model
 	 *          The goal model that represents the user session in which adaptation is taking place.
-	 * @param req
-	 *          The requirement instance whose parameter should be changed.
 	 * @param param
 	 *          The parameter to be changed.
 	 * @param value
 	 *          The new value of the parameter.
 	 */
-	void changeParameter(GoalModel model, Requirement req, Parameter param, String value);
+	void changeParameter(GoalModel model, Parameter param, String value);
 
 	/**
 	 * The target system should change the specified parameter to the specified value for all future executions of the
 	 * specified requirement.
 	 * 
-	 * @param reqClass
-	 *          The requirement class whose parameter should be changed.
 	 * @param param
 	 *          The parameter to be changed.
 	 * @param value
 	 *          The new value of the parameter.
 	 */
-	void changeParameter(EClass reqClass, Parameter param, String value);
+	void changeParameter(Parameter param, String value);
 
 	/**
 	 * The target system should copy the data associated with the source performative requirement instance (e.g., data

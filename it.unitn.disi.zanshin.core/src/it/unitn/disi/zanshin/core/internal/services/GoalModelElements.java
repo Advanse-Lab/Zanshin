@@ -189,7 +189,7 @@ public class GoalModelElements {
 		Set<Integer> superTypeIds = new HashSet<>();
 		for (EClass superType : superTypes)
 			superTypeIds.add(superType.getClassifierID());
-		
+
 		// FIXME: Why did I do this?
 		// superTypeIds.add(eClass.getClassifierID());
 
