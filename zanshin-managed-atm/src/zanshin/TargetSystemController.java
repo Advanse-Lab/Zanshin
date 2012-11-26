@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import banking.Money;
+
 import atm.ATM;
 
 /**
@@ -49,6 +51,9 @@ public class TargetSystemController implements ITargetSystem {
 	
 	/** TODO: document this field. */
 	private boolean inAbortState;
+	
+	/** TODO: document this field. */
+	private Money lastAmount;
 	
 	/** TODO: document this field. */
 	private BlockingQueue<AdaptationAction> actionQueue = new ArrayBlockingQueue<AdaptationAction>(100);
@@ -130,11 +135,24 @@ public class TargetSystemController implements ITargetSystem {
 		adaptationThread.setFrame(frame);
 	}
 	
+	/** Getter for lastAmount. */
+	public Money getLastAmount() {
+		return lastAmount;
+	}
+
 	/**
 	 * TODO: document this method.
 	 */
 	public void simulateErrorIfDefective() {
 		if (defectiveATM) throw new SimulatedATMDefect();
+	}
+	
+	/**
+	 * TODO: document this method.
+	 */
+	public void simulateNoCashError(Money amount) {
+		lastAmount = amount;
+		throw new NoCashException();
 	}
 
 	// -----------------------------------------------------------------------------------------------------------

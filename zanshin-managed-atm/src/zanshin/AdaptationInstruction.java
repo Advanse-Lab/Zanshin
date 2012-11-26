@@ -20,5 +20,6 @@ public enum AdaptationInstruction {
 	SUSPEND,
 	TERMINATE,
 	WAIT,
+	NOCASHWAIT,
 	WAIT_FOR_FIX;
 }

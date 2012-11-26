@@ -2,6 +2,7 @@ package zanshin;
 
 import java.awt.Component;
 import java.awt.Frame;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 import atm.ATM;
@@ -80,12 +81,21 @@ class AdaptationThread extends Thread {
 			if (AtmRequirement.T_PRINT_RECEIPT.matches(reqName))
 				retryPrintReceipt();
 			break;
+			
+		case APPLY_CONFIG:
+			@SuppressWarnings("unchecked")
+			Map<String, String> newConfig = (Map<String, String>)action.getParams()[0];
+			if (newConfig.containsKey(AtmRequirement.NOA.getName())) {
+				displayNoCashPanel(5000);
+				retryWithdrawal();
+			}
+			break;
 
 		case WAIT:
 			long waitTime = Long.parseLong(action.getParams()[1].toString());
 			displayWaitDialog(waitTime);
 			break;
-			
+									
 		case ABORT:
 			failGracefully();
 			break;
@@ -117,6 +127,29 @@ class AdaptationThread extends Thread {
 		frame.revalidate();
 	}
 
+	
+	/**
+	 * TODO: document this method.
+	 * 
+	 * @param waitTime
+	 */
+	private void displayNoCashPanel(long waitTime) {
+		Component guiPanel = frame.getComponent(0);
+		NoCashPanel nocashPanel = new NoCashPanel(waitTime);
+		frame.remove(guiPanel);
+		frame.add(nocashPanel);
+		frame.revalidate();
+		
+		try {
+			Thread.sleep(waitTime);
+		}
+		catch (InterruptedException e) {}
+
+		frame.remove(nocashPanel);
+		frame.add(guiPanel);
+		frame.revalidate();
+	}
+	
 	/**
 	 * TODO: document this method.
 	 */
@@ -129,6 +162,7 @@ class AdaptationThread extends Thread {
 			answer = atm.getCustomerConsole().readMenuChoice(question, menu);
 			if (answer == 0)
 				synchronized (controller) {
+					
 					controller.notifyAll();
 				}
 		}
@@ -137,6 +171,31 @@ class AdaptationThread extends Thread {
 		}
 	}
 
+	
+	/**
+	 * TODO: document this method.
+	 */
+	private void retryWithdrawal() {
+		// Prints a message to inform the user that an operator is arriving to fulfill his operation
+		String question = "Would you like to wait for an operator?";
+		String menu[] = { "Yes", "No" };
+		int answer;
+		try {
+			answer = atm.getCustomerConsole().readMenuChoice(question, menu);
+			if (answer == 0)
+				atm.getCashDispenser().setInitialCash(controller.getLastAmount());
+			else
+				controller.setInAbortState(true);
+			
+			synchronized (controller) {
+				controller.notifyAll();
+			}
+		}
+		catch (Cancelled e) {
+			log.info("User has canceled the operation during the adaptation!", e);
+		}
+	}
+	
 	/**
 	 * TODO: document this method.
 	 */

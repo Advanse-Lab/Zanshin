@@ -17,7 +17,12 @@ public enum AtmRequirement {
 	G_DETECT_CASH_AM("GDetectCashAm"),
 
 	/** TODO: document this field. */
-	AR3("AR3");
+	AR3("AR3"),
+	
+	/** Number of operators available */
+	
+	NOA("NOA");
+	
 
 	/** TODO: document this field. */
 	private String name;
