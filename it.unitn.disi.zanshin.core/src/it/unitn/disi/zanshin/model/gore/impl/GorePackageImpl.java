@@ -340,15 +340,6 @@ public class GorePackageImpl extends EPackageImpl implements GorePackage {
 	 * 
 	 * @generated
 	 */
-	public EReference getSoftgoal_Constraints() {
-		return (EReference) softgoalEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
 	public EClass getPerformativeRequirement() {
 		return performativeRequirementEClass;
 	}
@@ -369,15 +360,6 @@ public class GorePackageImpl extends EPackageImpl implements GorePackage {
 	 */
 	public EClass getQualityConstraint() {
 		return qualityConstraintEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	public EReference getQualityConstraint_Softgoal() {
-		return (EReference) qualityConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -769,13 +751,11 @@ public class GorePackageImpl extends EPackageImpl implements GorePackage {
 		createEAttribute(definableRequirementEClass, DEFINABLE_REQUIREMENT__STATE);
 
 		softgoalEClass = createEClass(SOFTGOAL);
-		createEReference(softgoalEClass, SOFTGOAL__CONSTRAINTS);
 
 		performativeRequirementEClass = createEClass(PERFORMATIVE_REQUIREMENT);
 		createEAttribute(performativeRequirementEClass, PERFORMATIVE_REQUIREMENT__START_TIME);
 
 		qualityConstraintEClass = createEClass(QUALITY_CONSTRAINT);
-		createEReference(qualityConstraintEClass, QUALITY_CONSTRAINT__SOFTGOAL);
 
 		awReqEClass = createEClass(AW_REQ);
 		createEReference(awReqEClass, AW_REQ__OTHER_TARGETS);
@@ -861,7 +841,7 @@ public class GorePackageImpl extends EPackageImpl implements GorePackage {
 		// Add supertypes to classes
 		requirementEClass.getESuperTypes().add(theLTLPackage.getOclAny());
 		definableRequirementEClass.getESuperTypes().add(this.getRequirement());
-		softgoalEClass.getESuperTypes().add(this.getRequirement());
+		softgoalEClass.getESuperTypes().add(this.getGoal());
 		performativeRequirementEClass.getESuperTypes().add(this.getDefinableRequirement());
 		qualityConstraintEClass.getESuperTypes().add(this.getDefinableRequirement());
 		awReqEClass.getESuperTypes().add(this.getDefinableRequirement());
@@ -897,7 +877,6 @@ public class GorePackageImpl extends EPackageImpl implements GorePackage {
 		addEOperation(definableRequirementEClass, null, "checkState", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(softgoalEClass, Softgoal.class, "Softgoal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getSoftgoal_Constraints(), this.getQualityConstraint(), this.getQualityConstraint_Softgoal(), "constraints", null, 0, -1, Softgoal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(performativeRequirementEClass, PerformativeRequirement.class, "PerformativeRequirement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEAttribute(getPerformativeRequirement_StartTime(), ecorePackage.getEDate(), "startTime", null, 0, 1, PerformativeRequirement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -907,10 +886,6 @@ public class GorePackageImpl extends EPackageImpl implements GorePackage {
 		addEOperation(performativeRequirementEClass, null, "checkState", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(qualityConstraintEClass, QualityConstraint.class, "QualityConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEReference(getQualityConstraint_Softgoal(), this.getSoftgoal(), this.getSoftgoal_Constraints(), "softgoal", null, 1, 1, QualityConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-
-		op = addEOperation(qualityConstraintEClass, null, "replaceWith", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
-		addEParameter(op, this.getRequirement(), "newRequirement", 0, 1, IS_UNIQUE, IS_ORDERED); //$NON-NLS-1$
 
 		initEClass(awReqEClass, AwReq.class, "AwReq", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 		initEReference(getAwReq_OtherTargets(), this.getDefinableRequirement(), null, "otherTargets", null, 0, -1, AwReq.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

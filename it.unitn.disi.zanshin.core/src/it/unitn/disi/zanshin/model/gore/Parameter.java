@@ -225,7 +225,7 @@ public interface Parameter extends EObject {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='String lowerBound = relation.getLowerBound();\nString upperBound = relation.getUpperBound();\n\n// Checks for null comparisons.\nBoolean lowerCmp = greaterThan(lowerBound);\nBoolean upperCmp = fewerThan(upperBound);\nif ((lowerBound != null) && (lowerCmp == null)) return null;\nif ((upperBound != null) && (upperCmp == null)) return null;\n\n// Does the comparisons, but only if needed. When the bounds are null, they mean infinity.\nreturn (((lowerBound == null) || lowerCmp) && ((upperBound == null) || upperCmp));'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='String lowerBound = relation.getLowerBound();\nString upperBound = relation.getUpperBound();\n\n// Checks for null comparisons.\nBoolean lowerCmp = greaterThan(lowerBound);\nBoolean upperCmp = fewerThan(upperBound);\nBoolean lowerEqual = equalTo(lowerBound);\nBoolean upperEqual = equalTo(upperBound);\nif ((lowerBound != null) && ((lowerCmp == null) || (lowerEqual == null))) return null;\nif ((upperBound != null) && ((upperCmp == null) || (upperEqual == null))) return null;\n\n// Does the comparisons, but only if needed. When the bounds are null, they mean infinity.\nreturn (((lowerBound == null) || (lowerCmp || lowerEqual)) && ((upperBound == null) || (upperCmp || upperEqual)));'"
 	 * @generated
 	 */
 	Boolean withinBoundsOf(DifferentialRelation relation);
@@ -243,7 +243,7 @@ public interface Parameter extends EObject {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='org.eclipse.emf.ecore.util.EcoreUtil.Copier copier = new org.eclipse.emf.ecore.util.EcoreUtil.Copier();\nParameter copy = (Parameter) copier.copy(this);\nreturn copy;'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='return (Parameter) org.eclipse.emf.ecore.util.EcoreUtil.copy(this);'"
 	 * @generated
 	 */
 	Parameter createCopy();

@@ -25,6 +25,7 @@
     <genClasses image="false" ecoreClass="eca.ecore#//AdaptationStrategy">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference eca.ecore#//AdaptationStrategy/awReq"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference eca.ecore#//AdaptationStrategy/condition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//AdaptationStrategy/useful"/>
       <genOperations ecoreOperation="eca.ecore#//AdaptationStrategy/execute">
         <genParameters ecoreParameter="eca.ecore#//AdaptationStrategy/execute/session"/>
       </genOperations>
@@ -32,9 +33,11 @@
     </genClasses>
     <genClasses image="false" ecoreClass="eca.ecore#//ApplicabilityCondition">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference eca.ecore#//ApplicabilityCondition/strategy"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference eca.ecore#//ApplicabilityCondition/parentCondition"/>
       <genOperations ecoreOperation="eca.ecore#//ApplicabilityCondition/evaluate">
         <genParameters ecoreParameter="eca.ecore#//ApplicabilityCondition/evaluate/session"/>
       </genOperations>
+      <genOperations ecoreOperation="eca.ecore#//ApplicabilityCondition/findStrategy"/>
     </genClasses>
     <genClasses ecoreClass="eca.ecore#//Event">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference eca.ecore#//Event/session"/>
@@ -43,6 +46,7 @@
     </genClasses>
     <genClasses ecoreClass="eca.ecore#//AdaptationSession">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference eca.ecore#//AdaptationSession/events"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference eca.ecore#//AdaptationSession/eventsWithUsefulStrategies"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//AdaptationSession/active"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//AdaptationSession/id"/>
       <genOperations ecoreOperation="eca.ecore#//AdaptationSession/addEvent">
@@ -78,16 +82,37 @@
         <genParameters ecoreParameter="eca.ecore#//MaxExecutionsPerSessionApplicabilityCondition/evaluate/session"/>
       </genOperations>
     </genClasses>
+    <genClasses ecoreClass="eca.ecore#//RefinedApplicabilityCondition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference eca.ecore#//RefinedApplicabilityCondition/children"/>
+    </genClasses>
     <genClasses ecoreClass="eca.ecore#//AndRefinedApplicabilityCondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference eca.ecore#//AndRefinedApplicabilityCondition/children"/>
       <genOperations ecoreOperation="eca.ecore#//AndRefinedApplicabilityCondition/evaluate">
         <genParameters ecoreParameter="eca.ecore#//AndRefinedApplicabilityCondition/evaluate/session"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="eca.ecore#//OrRefinedApplicabilityCondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference eca.ecore#//OrRefinedApplicabilityCondition/children"/>
       <genOperations ecoreOperation="eca.ecore#//OrRefinedApplicabilityCondition/evaluate">
         <genParameters ecoreParameter="eca.ecore#//OrRefinedApplicabilityCondition/evaluate/session"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="eca.ecore#//NotConcurrentWithApplicabilityCondition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference eca.ecore#//NotConcurrentWithApplicabilityCondition/awreqs"/>
+      <genOperations ecoreOperation="eca.ecore#//NotConcurrentWithApplicabilityCondition/evaluate">
+        <genParameters ecoreParameter="eca.ecore#//NotConcurrentWithApplicabilityCondition/evaluate/session"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="eca.ecore#//OrderInRangeApplicabilityCondition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//OrderInRangeApplicabilityCondition/lowerBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//OrderInRangeApplicabilityCondition/upperBound"/>
+      <genOperations ecoreOperation="eca.ecore#//OrderInRangeApplicabilityCondition/evaluate">
+        <genParameters ecoreParameter="eca.ecore#//OrderInRangeApplicabilityCondition/evaluate/session"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="eca.ecore#//FollowsSpecificStrategyApplicabilityCondition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference eca.ecore#//FollowsSpecificStrategyApplicabilityCondition/strategyToFollow"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//FollowsSpecificStrategyApplicabilityCondition/maxDelay"/>
+      <genOperations ecoreOperation="eca.ecore#//FollowsSpecificStrategyApplicabilityCondition/evaluate">
+        <genParameters ecoreParameter="eca.ecore#//FollowsSpecificStrategyApplicabilityCondition/evaluate/session"/>
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="eca.ecore#//AbortStrategy">
@@ -153,7 +178,6 @@
       </genOperations>
     </genClasses>
     <genClasses ecoreClass="eca.ecore#//ReconfigurationApplicabilityCondition">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference eca.ecore#//ReconfigurationApplicabilityCondition/wrappedCondition"/>
       <genOperations ecoreOperation="eca.ecore#//ReconfigurationApplicabilityCondition/evaluate">
         <genParameters ecoreParameter="eca.ecore#//ReconfigurationApplicabilityCondition/evaluate/session"/>
       </genOperations>
@@ -170,6 +194,22 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//ReconfigurationStrategy/procedureIds"/>
       <genOperations ecoreOperation="eca.ecore#//ReconfigurationStrategy/execute">
         <genParameters ecoreParameter="eca.ecore#//ReconfigurationStrategy/execute/session"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="eca.ecore#//ChangeParameterStrategy">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//ChangeParameterStrategy/level"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference eca.ecore#//ChangeParameterStrategy/changes"/>
+      <genOperations ecoreOperation="eca.ecore#//ChangeParameterStrategy/execute">
+        <genParameters ecoreParameter="eca.ecore#//ChangeParameterStrategy/execute/session"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="eca.ecore#//ParameterChange">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference eca.ecore#//ParameterChange/param"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute eca.ecore#//ParameterChange/value"/>
+    </genClasses>
+    <genClasses ecoreClass="eca.ecore#//DoNothingStrategy">
+      <genOperations ecoreOperation="eca.ecore#//DoNothingStrategy/execute">
+        <genParameters ecoreParameter="eca.ecore#//DoNothingStrategy/execute/session"/>
       </genOperations>
     </genClasses>
   </genPackages>
@@ -231,20 +271,13 @@
       <genOperations ecoreOperation="gore.ecore#//DefinableRequirement/fail"/>
       <genOperations ecoreOperation="gore.ecore#//DefinableRequirement/checkState"/>
     </genClasses>
-    <genClasses ecoreClass="gore.ecore#//Softgoal">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gore.ecore#//Softgoal/constraints"/>
-    </genClasses>
+    <genClasses ecoreClass="gore.ecore#//Softgoal"/>
     <genClasses ecoreClass="gore.ecore#//PerformativeRequirement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute gore.ecore#//PerformativeRequirement/startTime"/>
       <genOperations ecoreOperation="gore.ecore#//PerformativeRequirement/cancel"/>
       <genOperations ecoreOperation="gore.ecore#//PerformativeRequirement/checkState"/>
     </genClasses>
-    <genClasses ecoreClass="gore.ecore#//QualityConstraint">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gore.ecore#//QualityConstraint/softgoal"/>
-      <genOperations ecoreOperation="gore.ecore#//QualityConstraint/replaceWith">
-        <genParameters ecoreParameter="gore.ecore#//QualityConstraint/replaceWith/newRequirement"/>
-      </genOperations>
-    </genClasses>
+    <genClasses ecoreClass="gore.ecore#//QualityConstraint"/>
     <genClasses ecoreClass="gore.ecore#//AwReq">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gore.ecore#//AwReq/otherTargets"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference gore.ecore#//AwReq/target"/>

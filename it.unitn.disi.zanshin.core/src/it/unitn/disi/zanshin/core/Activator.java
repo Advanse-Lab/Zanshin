@@ -1,5 +1,6 @@
 package it.unitn.disi.zanshin.core;
 
+import it.unitn.disi.zanshin.services.IAdaptationService;
 import it.unitn.disi.zanshin.services.IMonitoringService;
 import it.unitn.disi.zanshin.services.IReconfigurationService;
 import it.unitn.disi.zanshin.services.IRepositoryService;
@@ -27,6 +28,9 @@ public class Activator implements BundleActivator {
 
 	/** The target system controller service, if any is registered. */
 	private static ITargetSystemControllerService controllerService;
+
+	/** The adaptation service, if any is registered. */
+	private static IAdaptationService adaptationService;
 
 	/** The repository service. */
 	private static IRepositoryService repositoryService;
@@ -57,6 +61,23 @@ public class Activator implements BundleActivator {
 	public static void unsetControllerService(ITargetSystemControllerService controllerService) {
 		Activator.controllerService = null;
 		CoreUtils.log.info("Target System Controller Service disposed from this bundle"); //$NON-NLS-1$
+	}
+
+	/** Getter for adaptationService. */
+	public static IAdaptationService getAdaptationService() {
+		return adaptationService;
+	}
+
+	/** Setter for controllerService. */
+	public static void setAdaptationService(IAdaptationService adaptationService) {
+		Activator.adaptationService = adaptationService;
+		CoreUtils.log.info("Adaptation Service injected in this bundle"); //$NON-NLS-1$
+	}
+
+	/** Un-setter for adaptationService (required by OSGi Declarative Services). */
+	public static void unsetAdaptationService(IAdaptationService adaptationService) {
+		Activator.adaptationService = null;
+		CoreUtils.log.info("Adaptation Service disposed from this bundle"); //$NON-NLS-1$
 	}
 
 	/** Getter for repositoryService. */

@@ -32,12 +32,17 @@ public class QualiaReconfigurationService implements IReconfigurationService {
 
 	/** @see it.unitn.disi.zanshin.services.IReconfigurationService#checkApplicability(java.util.List, it.unitn.disi.zanshin.model.gore.AwReq, it.unitn.disi.zanshin.model.eca.AdaptationSession, it.unitn.disi.zanshin.model.eca.ApplicabilityCondition) */
 	@Override
-	public boolean checkApplicability(List<String> procedureIds, AwReq awreq, AdaptationSession session, ApplicabilityCondition wrappedCondition) {
+	public boolean checkApplicability(List<String> procedureIds, AwReq awreq, AdaptationSession session, List<ApplicabilityCondition> wrappedConditions) {
 		// Creates the adaptation algorithm given the procedures.
 		AdaptationAlgorithm algorithm = new AdaptationAlgorithm(procedureIds);
+		
+		// Checks if all procedures of the algorithm are applicable.
+		boolean result = algorithm.checkApplicability(awreq, session);
 
 		// If all procedures of the algorithm are applicable, check the wrapped condition and return.
-		return algorithm.checkApplicability(awreq, session) && wrappedCondition.evaluate(session);
+		for (int i = 0; result && i < wrappedConditions.size(); i++)
+			result = wrappedConditions.get(i).evaluate(session);
+		return result;
 	}
 
 	/** @see it.unitn.disi.zanshin.services.IReconfigurationService#findConfiguration(java.util.List, it.unitn.disi.zanshin.model.gore.AwReq) */

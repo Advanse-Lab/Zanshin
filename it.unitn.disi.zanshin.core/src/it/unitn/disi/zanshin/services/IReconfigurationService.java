@@ -31,7 +31,7 @@ public interface IReconfigurationService {
 	 * @param wrappedCondition
 	 * @return
 	 */
-	boolean checkApplicability(List<String> procedureIds, AwReq awreq, AdaptationSession session, ApplicabilityCondition wrappedCondition);
+	boolean checkApplicability(List<String> procedureIds, AwReq awreq, AdaptationSession session, List<ApplicabilityCondition> wrappedConditions);
 
 	/**
 	 * TODO: document this method.

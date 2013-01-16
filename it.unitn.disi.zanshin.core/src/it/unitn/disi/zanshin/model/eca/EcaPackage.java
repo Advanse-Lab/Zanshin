@@ -222,13 +222,21 @@ public interface EcaPackage extends EPackage {
 	int ADAPTATION_STRATEGY__CONDITION = 1;
 
 	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_STRATEGY__USEFUL = 2;
+
+	/**
 	 * The number of structural features of the '<em>Adaptation Strategy</em>' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPTATION_STRATEGY_FEATURE_COUNT = 2;
+	int ADAPTATION_STRATEGY_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.ApplicabilityConditionImpl
@@ -250,13 +258,22 @@ public interface EcaPackage extends EPackage {
 	int APPLICABILITY_CONDITION__STRATEGY = 0;
 
 	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int APPLICABILITY_CONDITION__PARENT_CONDITION = 1;
+
+	/**
 	 * The number of structural features of the '<em>Applicability Condition</em>' class. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int APPLICABILITY_CONDITION_FEATURE_COUNT = 1;
+	int APPLICABILITY_CONDITION_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.EventImpl <em>Event</em>}' class. <!--
@@ -320,12 +337,21 @@ public interface EcaPackage extends EPackage {
 	int ADAPTATION_SESSION__EVENTS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Events With Useful Strategies</b></em>' reference list. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES = 1;
+
+	/**
 	 * The feature id for the '<em><b>Active</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPTATION_SESSION__ACTIVE = 1;
+	int ADAPTATION_SESSION__ACTIVE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Id</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -333,7 +359,7 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPTATION_SESSION__ID = 2;
+	int ADAPTATION_SESSION__ID = 3;
 
 	/**
 	 * The number of structural features of the '<em>Adaptation Session</em>' class. <!-- begin-user-doc --> <!--
@@ -342,7 +368,7 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADAPTATION_SESSION_FEATURE_COUNT = 3;
+	int ADAPTATION_SESSION_FEATURE_COUNT = 4;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.SimpleResolutionConditionImpl
@@ -463,6 +489,15 @@ public interface EcaPackage extends EPackage {
 	int SIMPLE_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
 
 	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_APPLICABILITY_CONDITION__PARENT_CONDITION = APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
 	 * The number of structural features of the '<em>Simple Applicability Condition</em>' class. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * 
@@ -492,6 +527,15 @@ public interface EcaPackage extends EPackage {
 	int MAX_EXECUTIONS_PER_SESSION_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
 
 	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int MAX_EXECUTIONS_PER_SESSION_APPLICABILITY_CONDITION__PARENT_CONDITION = APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
 	 * The feature id for the '<em><b>Max Executions</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -509,14 +553,14 @@ public interface EcaPackage extends EPackage {
 	int MAX_EXECUTIONS_PER_SESSION_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.AndRefinedApplicabilityConditionImpl
-	 * <em>And Refined Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.RefinedApplicabilityConditionImpl
+	 * <em>Refined Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @see it.unitn.disi.zanshin.model.eca.impl.AndRefinedApplicabilityConditionImpl
-	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getAndRefinedApplicabilityCondition()
+	 * @see it.unitn.disi.zanshin.model.eca.impl.RefinedApplicabilityConditionImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getRefinedApplicabilityCondition()
 	 * @generated
 	 */
-	int AND_REFINED_APPLICABILITY_CONDITION = 11;
+	int REFINED_APPLICABILITY_CONDITION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
@@ -525,7 +569,16 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_REFINED_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+	int REFINED_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+
+	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_APPLICABILITY_CONDITION__PARENT_CONDITION = APPLICABILITY_CONDITION__PARENT_CONDITION;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -534,7 +587,53 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_REFINED_APPLICABILITY_CONDITION__CHILDREN = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+	int REFINED_APPLICABILITY_CONDITION__CHILDREN = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Refined Applicability Condition</em>' class. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.AndRefinedApplicabilityConditionImpl
+	 * <em>And Refined Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.AndRefinedApplicabilityConditionImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getAndRefinedApplicabilityCondition()
+	 * @generated
+	 */
+	int AND_REFINED_APPLICABILITY_CONDITION = 12;
+
+	/**
+	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int AND_REFINED_APPLICABILITY_CONDITION__STRATEGY = REFINED_APPLICABILITY_CONDITION__STRATEGY;
+
+	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int AND_REFINED_APPLICABILITY_CONDITION__PARENT_CONDITION = REFINED_APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int AND_REFINED_APPLICABILITY_CONDITION__CHILDREN = REFINED_APPLICABILITY_CONDITION__CHILDREN;
 
 	/**
 	 * The number of structural features of the '<em>And Refined Applicability Condition</em>' class. <!-- begin-user-doc
@@ -543,7 +642,7 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+	int AND_REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT = REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.OrRefinedApplicabilityConditionImpl
@@ -553,7 +652,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getOrRefinedApplicabilityCondition()
 	 * @generated
 	 */
-	int OR_REFINED_APPLICABILITY_CONDITION = 12;
+	int OR_REFINED_APPLICABILITY_CONDITION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
@@ -562,7 +661,16 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_REFINED_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+	int OR_REFINED_APPLICABILITY_CONDITION__STRATEGY = REFINED_APPLICABILITY_CONDITION__STRATEGY;
+
+	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int OR_REFINED_APPLICABILITY_CONDITION__PARENT_CONDITION = REFINED_APPLICABILITY_CONDITION__PARENT_CONDITION;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list. <!-- begin-user-doc --> <!--
@@ -571,7 +679,7 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_REFINED_APPLICABILITY_CONDITION__CHILDREN = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+	int OR_REFINED_APPLICABILITY_CONDITION__CHILDREN = REFINED_APPLICABILITY_CONDITION__CHILDREN;
 
 	/**
 	 * The number of structural features of the '<em>Or Refined Applicability Condition</em>' class. <!-- begin-user-doc
@@ -580,7 +688,169 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+	int OR_REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT = REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '
+	 * {@link it.unitn.disi.zanshin.model.eca.impl.NotConcurrentWithApplicabilityConditionImpl
+	 * <em>Not Concurrent With Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.NotConcurrentWithApplicabilityConditionImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getNotConcurrentWithApplicabilityCondition()
+	 * @generated
+	 */
+	int NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION = 14;
+
+	/**
+	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+
+	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION__PARENT_CONDITION = APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Awreqs</b></em>' reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION__AWREQS = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Not Concurrent With Applicability Condition</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.OrderInRangeApplicabilityConditionImpl
+	 * <em>Order In Range Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.OrderInRangeApplicabilityConditionImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getOrderInRangeApplicabilityCondition()
+	 * @generated
+	 */
+	int ORDER_IN_RANGE_APPLICABILITY_CONDITION = 15;
+
+	/**
+	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_IN_RANGE_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+
+	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_IN_RANGE_APPLICABILITY_CONDITION__PARENT_CONDITION = APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_IN_RANGE_APPLICABILITY_CONDITION__LOWER_BOUND = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_IN_RANGE_APPLICABILITY_CONDITION__UPPER_BOUND = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Order In Range Applicability Condition</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ORDER_IN_RANGE_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '
+	 * {@link it.unitn.disi.zanshin.model.eca.impl.FollowsSpecificStrategyApplicabilityConditionImpl
+	 * <em>Follows Specific Strategy Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.FollowsSpecificStrategyApplicabilityConditionImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getFollowsSpecificStrategyApplicabilityCondition()
+	 * @generated
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION = 16;
+
+	/**
+	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+
+	/**
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__PARENT_CONDITION = APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Strategy To Follow</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__STRATEGY_TO_FOLLOW = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Min Delay</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__MIN_DELAY = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Max Delay</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__MAX_DELAY = APPLICABILITY_CONDITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Follows Specific Strategy Applicability Condition</em>' class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.RetryStrategyImpl <em>Retry Strategy</em>}'
@@ -590,7 +860,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getRetryStrategy()
 	 * @generated
 	 */
-	int RETRY_STRATEGY = 17;
+	int RETRY_STRATEGY = 21;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.StrengthenEnableChildStrategyImpl
@@ -600,7 +870,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getStrengthenEnableChildStrategy()
 	 * @generated
 	 */
-	int STRENGTHEN_ENABLE_CHILD_STRATEGY = 18;
+	int STRENGTHEN_ENABLE_CHILD_STRATEGY = 22;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.StrengthenReplaceImpl
@@ -610,7 +880,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getStrengthenReplace()
 	 * @generated
 	 */
-	int STRENGTHEN_REPLACE = 19;
+	int STRENGTHEN_REPLACE = 23;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.WarningStrategyImpl
@@ -620,7 +890,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getWarningStrategy()
 	 * @generated
 	 */
-	int WARNING_STRATEGY = 20;
+	int WARNING_STRATEGY = 24;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.AbortStrategyImpl <em>Abort Strategy</em>}'
@@ -630,7 +900,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getAbortStrategy()
 	 * @generated
 	 */
-	int ABORT_STRATEGY = 13;
+	int ABORT_STRATEGY = 17;
 
 	/**
 	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -650,6 +920,14 @@ public interface EcaPackage extends EPackage {
 	int ABORT_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
 
 	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int ABORT_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
+
+	/**
 	 * The number of structural features of the '<em>Abort Strategy</em>' class. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
@@ -666,7 +944,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getDelegateStrategy()
 	 * @generated
 	 */
-	int DELEGATE_STRATEGY = 14;
+	int DELEGATE_STRATEGY = 18;
 
 	/**
 	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -684,6 +962,14 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int DELEGATE_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DELEGATE_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
 
 	/**
 	 * The feature id for the '<em><b>Actor</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -710,7 +996,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getRelaxDisableChildStrategy()
 	 * @generated
 	 */
-	int RELAX_DISABLE_CHILD_STRATEGY = 15;
+	int RELAX_DISABLE_CHILD_STRATEGY = 19;
 
 	/**
 	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -728,6 +1014,14 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELAX_DISABLE_CHILD_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int RELAX_DISABLE_CHILD_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
 
 	/**
 	 * The feature id for the '<em><b>Requirement</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -770,7 +1064,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getRelaxReplace()
 	 * @generated
 	 */
-	int RELAX_REPLACE = 16;
+	int RELAX_REPLACE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -788,6 +1082,14 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELAX_REPLACE__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int RELAX_REPLACE__USEFUL = ADAPTATION_STRATEGY__USEFUL;
 
 	/**
 	 * The feature id for the '<em><b>Requirement</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -848,6 +1150,14 @@ public interface EcaPackage extends EPackage {
 	int RETRY_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
 
 	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int RETRY_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
+
+	/**
 	 * The feature id for the '<em><b>Copy</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -888,6 +1198,14 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRENGTHEN_ENABLE_CHILD_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRENGTHEN_ENABLE_CHILD_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
 
 	/**
 	 * The feature id for the '<em><b>Requirement</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -938,6 +1256,14 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int STRENGTHEN_REPLACE__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int STRENGTHEN_REPLACE__USEFUL = ADAPTATION_STRATEGY__USEFUL;
 
 	/**
 	 * The feature id for the '<em><b>Requirement</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -998,6 +1324,14 @@ public interface EcaPackage extends EPackage {
 	int WARNING_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
 
 	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int WARNING_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
+
+	/**
 	 * The feature id for the '<em><b>Actor</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -1022,7 +1356,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getReconfigurationResolutionCondition()
 	 * @generated
 	 */
-	int RECONFIGURATION_RESOLUTION_CONDITION = 22;
+	int RECONFIGURATION_RESOLUTION_CONDITION = 26;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.ReconfigurationStrategyImpl
@@ -1032,7 +1366,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getReconfigurationStrategy()
 	 * @generated
 	 */
-	int RECONFIGURATION_STRATEGY = 23;
+	int RECONFIGURATION_STRATEGY = 27;
 
 	/**
 	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.ReconfigurationApplicabilityConditionImpl
@@ -1042,7 +1376,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getReconfigurationApplicabilityCondition()
 	 * @generated
 	 */
-	int RECONFIGURATION_APPLICABILITY_CONDITION = 21;
+	int RECONFIGURATION_APPLICABILITY_CONDITION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Strategy</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc
@@ -1051,16 +1385,25 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RECONFIGURATION_APPLICABILITY_CONDITION__STRATEGY = APPLICABILITY_CONDITION__STRATEGY;
+	int RECONFIGURATION_APPLICABILITY_CONDITION__STRATEGY = REFINED_APPLICABILITY_CONDITION__STRATEGY;
 
 	/**
-	 * The feature id for the '<em><b>Wrapped Condition</b></em>' containment reference. <!-- begin-user-doc --> <!--
+	 * The feature id for the '<em><b>Parent Condition</b></em>' container reference. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
 	 * @generated
 	 * @ordered
 	 */
-	int RECONFIGURATION_APPLICABILITY_CONDITION__WRAPPED_CONDITION = APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
+	int RECONFIGURATION_APPLICABILITY_CONDITION__PARENT_CONDITION = REFINED_APPLICABILITY_CONDITION__PARENT_CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int RECONFIGURATION_APPLICABILITY_CONDITION__CHILDREN = REFINED_APPLICABILITY_CONDITION__CHILDREN;
 
 	/**
 	 * The number of structural features of the '<em>Reconfiguration Applicability Condition</em>' class. <!--
@@ -1069,7 +1412,7 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RECONFIGURATION_APPLICABILITY_CONDITION_FEATURE_COUNT = APPLICABILITY_CONDITION_FEATURE_COUNT + 1;
+	int RECONFIGURATION_APPLICABILITY_CONDITION_FEATURE_COUNT = REFINED_APPLICABILITY_CONDITION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1115,6 +1458,14 @@ public interface EcaPackage extends EPackage {
 	int RECONFIGURATION_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
 
 	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int RECONFIGURATION_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
+
+	/**
 	 * The feature id for the '<em><b>Algorithm Id</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated
@@ -1156,7 +1507,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getChangeParameterStrategy()
 	 * @generated
 	 */
-	int CHANGE_PARAMETER_STRATEGY = 24;
+	int CHANGE_PARAMETER_STRATEGY = 28;
 
 	/**
 	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1174,6 +1525,14 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int CHANGE_PARAMETER_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int CHANGE_PARAMETER_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
 
 	/**
 	 * The feature id for the '<em><b>Level</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1208,7 +1567,7 @@ public interface EcaPackage extends EPackage {
 	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getParameterChange()
 	 * @generated
 	 */
-	int PARAMETER_CHANGE = 25;
+	int PARAMETER_CHANGE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Param</b></em>' reference. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -1234,6 +1593,50 @@ public interface EcaPackage extends EPackage {
 	 * @ordered
 	 */
 	int PARAMETER_CHANGE_FEATURE_COUNT = 2;
+
+	/**
+	 * The meta object id for the '{@link it.unitn.disi.zanshin.model.eca.impl.DoNothingStrategyImpl
+	 * <em>Do Nothing Strategy</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see it.unitn.disi.zanshin.model.eca.impl.DoNothingStrategyImpl
+	 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getDoNothingStrategy()
+	 * @generated
+	 */
+	int DO_NOTHING_STRATEGY = 30;
+
+	/**
+	 * The feature id for the '<em><b>Aw Req</b></em>' container reference. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DO_NOTHING_STRATEGY__AW_REQ = ADAPTATION_STRATEGY__AW_REQ;
+
+	/**
+	 * The feature id for the '<em><b>Condition</b></em>' containment reference. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DO_NOTHING_STRATEGY__CONDITION = ADAPTATION_STRATEGY__CONDITION;
+
+	/**
+	 * The feature id for the '<em><b>Useful</b></em>' attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DO_NOTHING_STRATEGY__USEFUL = ADAPTATION_STRATEGY__USEFUL;
+
+	/**
+	 * The number of structural features of the '<em>Do Nothing Strategy</em>' class. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generated
+	 * @ordered
+	 */
+	int DO_NOTHING_STRATEGY_FEATURE_COUNT = ADAPTATION_STRATEGY_FEATURE_COUNT + 0;
 
 	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.EcaAwReq <em>Aw Req</em>}'. <!--
@@ -1337,6 +1740,17 @@ public interface EcaPackage extends EPackage {
 	EReference getAdaptationStrategy_Condition();
 
 	/**
+	 * Returns the meta object for the attribute '{@link it.unitn.disi.zanshin.model.eca.AdaptationStrategy#isUseful
+	 * <em>Useful</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Useful</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.AdaptationStrategy#isUseful()
+	 * @see #getAdaptationStrategy()
+	 * @generated
+	 */
+	EAttribute getAdaptationStrategy_Useful();
+
+	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.ApplicabilityCondition
 	 * <em>Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1357,6 +1771,18 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getApplicabilityCondition_Strategy();
+
+	/**
+	 * Returns the meta object for the container reference '
+	 * {@link it.unitn.disi.zanshin.model.eca.ApplicabilityCondition#getParentCondition <em>Parent Condition</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the container reference '<em>Parent Condition</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.ApplicabilityCondition#getParentCondition()
+	 * @see #getApplicabilityCondition()
+	 * @generated
+	 */
+	EReference getApplicabilityCondition_ParentCondition();
 
 	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.Event <em>Event</em>}'. <!--
@@ -1422,6 +1848,18 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAdaptationSession_Events();
+
+	/**
+	 * Returns the meta object for the reference list '
+	 * {@link it.unitn.disi.zanshin.model.eca.AdaptationSession#getEventsWithUsefulStrategies
+	 * <em>Events With Useful Strategies</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Events With Useful Strategies</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.AdaptationSession#getEventsWithUsefulStrategies()
+	 * @see #getAdaptationSession()
+	 * @generated
+	 */
+	EReference getAdaptationSession_EventsWithUsefulStrategies();
 
 	/**
 	 * Returns the meta object for the attribute '{@link it.unitn.disi.zanshin.model.eca.AdaptationSession#isActive
@@ -1533,6 +1971,28 @@ public interface EcaPackage extends EPackage {
 	EAttribute getMaxExecutionsPerSessionApplicabilityCondition_MaxExecutions();
 
 	/**
+	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition
+	 * <em>Refined Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Refined Applicability Condition</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition
+	 * @generated
+	 */
+	EClass getRefinedApplicabilityCondition();
+
+	/**
+	 * Returns the meta object for the containment reference list '
+	 * {@link it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition#getChildren <em>Children</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the containment reference list '<em>Children</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition#getChildren()
+	 * @see #getRefinedApplicabilityCondition()
+	 * @generated
+	 */
+	EReference getRefinedApplicabilityCondition_Children();
+
+	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition
 	 * <em>And Refined Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1541,18 +2001,6 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAndRefinedApplicabilityCondition();
-
-	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition#getChildren <em>Children</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference list '<em>Children</em>'.
-	 * @see it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition#getChildren()
-	 * @see #getAndRefinedApplicabilityCondition()
-	 * @generated
-	 */
-	EReference getAndRefinedApplicabilityCondition_Children();
 
 	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition
@@ -1565,16 +2013,107 @@ public interface EcaPackage extends EPackage {
 	EClass getOrRefinedApplicabilityCondition();
 
 	/**
-	 * Returns the meta object for the containment reference list '
-	 * {@link it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition#getChildren <em>Children</em>}'. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
+	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition
+	 * <em>Not Concurrent With Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @return the meta object for the containment reference list '<em>Children</em>'.
-	 * @see it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition#getChildren()
-	 * @see #getOrRefinedApplicabilityCondition()
+	 * @return the meta object for class '<em>Not Concurrent With Applicability Condition</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition
 	 * @generated
 	 */
-	EReference getOrRefinedApplicabilityCondition_Children();
+	EClass getNotConcurrentWithApplicabilityCondition();
+
+	/**
+	 * Returns the meta object for the reference list '
+	 * {@link it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition#getAwreqs <em>Awreqs</em>}'. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference list '<em>Awreqs</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition#getAwreqs()
+	 * @see #getNotConcurrentWithApplicabilityCondition()
+	 * @generated
+	 */
+	EReference getNotConcurrentWithApplicabilityCondition_Awreqs();
+
+	/**
+	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition
+	 * <em>Order In Range Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Order In Range Applicability Condition</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition
+	 * @generated
+	 */
+	EClass getOrderInRangeApplicabilityCondition();
+
+	/**
+	 * Returns the meta object for the attribute '
+	 * {@link it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition#getLowerBound <em>Lower Bound</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Lower Bound</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition#getLowerBound()
+	 * @see #getOrderInRangeApplicabilityCondition()
+	 * @generated
+	 */
+	EAttribute getOrderInRangeApplicabilityCondition_LowerBound();
+
+	/**
+	 * Returns the meta object for the attribute '
+	 * {@link it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition#getUpperBound <em>Upper Bound</em>}'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Upper Bound</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition#getUpperBound()
+	 * @see #getOrderInRangeApplicabilityCondition()
+	 * @generated
+	 */
+	EAttribute getOrderInRangeApplicabilityCondition_UpperBound();
+
+	/**
+	 * Returns the meta object for class '
+	 * {@link it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition
+	 * <em>Follows Specific Strategy Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Follows Specific Strategy Applicability Condition</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition
+	 * @generated
+	 */
+	EClass getFollowsSpecificStrategyApplicabilityCondition();
+
+	/**
+	 * Returns the meta object for the reference '
+	 * {@link it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition#getStrategyToFollow
+	 * <em>Strategy To Follow</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the reference '<em>Strategy To Follow</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition#getStrategyToFollow()
+	 * @see #getFollowsSpecificStrategyApplicabilityCondition()
+	 * @generated
+	 */
+	EReference getFollowsSpecificStrategyApplicabilityCondition_StrategyToFollow();
+
+	/**
+	 * Returns the meta object for the attribute '
+	 * {@link it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition#getMinDelay
+	 * <em>Min Delay</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Min Delay</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition#getMinDelay()
+	 * @see #getFollowsSpecificStrategyApplicabilityCondition()
+	 * @generated
+	 */
+	EAttribute getFollowsSpecificStrategyApplicabilityCondition_MinDelay();
+
+	/**
+	 * Returns the meta object for the attribute '
+	 * {@link it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition#getMaxDelay
+	 * <em>Max Delay</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for the attribute '<em>Max Delay</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition#getMaxDelay()
+	 * @see #getFollowsSpecificStrategyApplicabilityCondition()
+	 * @generated
+	 */
+	EAttribute getFollowsSpecificStrategyApplicabilityCondition_MaxDelay();
 
 	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.RetryStrategy <em>Retry Strategy</em>}'.
@@ -1863,6 +2402,16 @@ public interface EcaPackage extends EPackage {
 	EAttribute getParameterChange_Value();
 
 	/**
+	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.DoNothingStrategy
+	 * <em>Do Nothing Strategy</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return the meta object for class '<em>Do Nothing Strategy</em>'.
+	 * @see it.unitn.disi.zanshin.model.eca.DoNothingStrategy
+	 * @generated
+	 */
+	EClass getDoNothingStrategy();
+
+	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition
 	 * <em>Reconfiguration Applicability Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -1871,18 +2420,6 @@ public interface EcaPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getReconfigurationApplicabilityCondition();
-
-	/**
-	 * Returns the meta object for the containment reference '
-	 * {@link it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition#getWrappedCondition
-	 * <em>Wrapped Condition</em>}'. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @return the meta object for the containment reference '<em>Wrapped Condition</em>'.
-	 * @see it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition#getWrappedCondition()
-	 * @see #getReconfigurationApplicabilityCondition()
-	 * @generated
-	 */
-	EReference getReconfigurationApplicabilityCondition_WrappedCondition();
 
 	/**
 	 * Returns the meta object for class '{@link it.unitn.disi.zanshin.model.eca.AbortStrategy <em>Abort Strategy</em>}'.
@@ -2115,6 +2652,14 @@ public interface EcaPackage extends EPackage {
 		EReference ADAPTATION_STRATEGY__CONDITION = eINSTANCE.getAdaptationStrategy_Condition();
 
 		/**
+		 * The meta object literal for the '<em><b>Useful</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute ADAPTATION_STRATEGY__USEFUL = eINSTANCE.getAdaptationStrategy_Useful();
+
+		/**
 		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.ApplicabilityConditionImpl
 		 * <em>Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
 		 * 
@@ -2131,6 +2676,14 @@ public interface EcaPackage extends EPackage {
 		 * @generated
 		 */
 		EReference APPLICABILITY_CONDITION__STRATEGY = eINSTANCE.getApplicabilityCondition_Strategy();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Condition</b></em>' container reference feature. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference APPLICABILITY_CONDITION__PARENT_CONDITION = eINSTANCE.getApplicabilityCondition_ParentCondition();
 
 		/**
 		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.EventImpl <em>Event</em>}' class.
@@ -2183,6 +2736,14 @@ public interface EcaPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ADAPTATION_SESSION__EVENTS = eINSTANCE.getAdaptationSession_Events();
+
+		/**
+		 * The meta object literal for the '<em><b>Events With Useful Strategies</b></em>' reference list feature. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES = eINSTANCE.getAdaptationSession_EventsWithUsefulStrategies();
 
 		/**
 		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature. <!-- begin-user-doc --> <!--
@@ -2277,6 +2838,24 @@ public interface EcaPackage extends EPackage {
 		EAttribute MAX_EXECUTIONS_PER_SESSION_APPLICABILITY_CONDITION__MAX_EXECUTIONS = eINSTANCE.getMaxExecutionsPerSessionApplicabilityCondition_MaxExecutions();
 
 		/**
+		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.RefinedApplicabilityConditionImpl
+		 * <em>Refined Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.RefinedApplicabilityConditionImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getRefinedApplicabilityCondition()
+		 * @generated
+		 */
+		EClass REFINED_APPLICABILITY_CONDITION = eINSTANCE.getRefinedApplicabilityCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature. <!--
+		 * begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference REFINED_APPLICABILITY_CONDITION__CHILDREN = eINSTANCE.getRefinedApplicabilityCondition_Children();
+
+		/**
 		 * The meta object literal for the '
 		 * {@link it.unitn.disi.zanshin.model.eca.impl.AndRefinedApplicabilityConditionImpl
 		 * <em>And Refined Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2286,14 +2865,6 @@ public interface EcaPackage extends EPackage {
 		 * @generated
 		 */
 		EClass AND_REFINED_APPLICABILITY_CONDITION = eINSTANCE.getAndRefinedApplicabilityCondition();
-
-		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference AND_REFINED_APPLICABILITY_CONDITION__CHILDREN = eINSTANCE.getAndRefinedApplicabilityCondition_Children();
 
 		/**
 		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.OrRefinedApplicabilityConditionImpl
@@ -2306,12 +2877,85 @@ public interface EcaPackage extends EPackage {
 		EClass OR_REFINED_APPLICABILITY_CONDITION = eINSTANCE.getOrRefinedApplicabilityCondition();
 
 		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
+		 * The meta object literal for the '
+		 * {@link it.unitn.disi.zanshin.model.eca.impl.NotConcurrentWithApplicabilityConditionImpl
+		 * <em>Not Concurrent With Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.NotConcurrentWithApplicabilityConditionImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getNotConcurrentWithApplicabilityCondition()
+		 * @generated
+		 */
+		EClass NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION = eINSTANCE.getNotConcurrentWithApplicabilityCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Awreqs</b></em>' reference list feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
 		 * 
 		 * @generated
 		 */
-		EReference OR_REFINED_APPLICABILITY_CONDITION__CHILDREN = eINSTANCE.getOrRefinedApplicabilityCondition_Children();
+		EReference NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION__AWREQS = eINSTANCE.getNotConcurrentWithApplicabilityCondition_Awreqs();
+
+		/**
+		 * The meta object literal for the '
+		 * {@link it.unitn.disi.zanshin.model.eca.impl.OrderInRangeApplicabilityConditionImpl
+		 * <em>Order In Range Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.OrderInRangeApplicabilityConditionImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getOrderInRangeApplicabilityCondition()
+		 * @generated
+		 */
+		EClass ORDER_IN_RANGE_APPLICABILITY_CONDITION = eINSTANCE.getOrderInRangeApplicabilityCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute ORDER_IN_RANGE_APPLICABILITY_CONDITION__LOWER_BOUND = eINSTANCE.getOrderInRangeApplicabilityCondition_LowerBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute ORDER_IN_RANGE_APPLICABILITY_CONDITION__UPPER_BOUND = eINSTANCE.getOrderInRangeApplicabilityCondition_UpperBound();
+
+		/**
+		 * The meta object literal for the '
+		 * {@link it.unitn.disi.zanshin.model.eca.impl.FollowsSpecificStrategyApplicabilityConditionImpl
+		 * <em>Follows Specific Strategy Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.FollowsSpecificStrategyApplicabilityConditionImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getFollowsSpecificStrategyApplicabilityCondition()
+		 * @generated
+		 */
+		EClass FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION = eINSTANCE.getFollowsSpecificStrategyApplicabilityCondition();
+
+		/**
+		 * The meta object literal for the '<em><b>Strategy To Follow</b></em>' reference feature. <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EReference FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__STRATEGY_TO_FOLLOW = eINSTANCE.getFollowsSpecificStrategyApplicabilityCondition_StrategyToFollow();
+
+		/**
+		 * The meta object literal for the '<em><b>Min Delay</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__MIN_DELAY = eINSTANCE.getFollowsSpecificStrategyApplicabilityCondition_MinDelay();
+
+		/**
+		 * The meta object literal for the '<em><b>Max Delay</b></em>' attribute feature. <!-- begin-user-doc --> <!--
+		 * end-user-doc -->
+		 * 
+		 * @generated
+		 */
+		EAttribute FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION__MAX_DELAY = eINSTANCE.getFollowsSpecificStrategyApplicabilityCondition_MaxDelay();
 
 		/**
 		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.RetryStrategyImpl
@@ -2539,6 +3183,16 @@ public interface EcaPackage extends EPackage {
 		EAttribute PARAMETER_CHANGE__VALUE = eINSTANCE.getParameterChange_Value();
 
 		/**
+		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.DoNothingStrategyImpl
+		 * <em>Do Nothing Strategy</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
+		 * @see it.unitn.disi.zanshin.model.eca.impl.DoNothingStrategyImpl
+		 * @see it.unitn.disi.zanshin.model.eca.impl.EcaPackageImpl#getDoNothingStrategy()
+		 * @generated
+		 */
+		EClass DO_NOTHING_STRATEGY = eINSTANCE.getDoNothingStrategy();
+
+		/**
 		 * The meta object literal for the '
 		 * {@link it.unitn.disi.zanshin.model.eca.impl.ReconfigurationApplicabilityConditionImpl
 		 * <em>Reconfiguration Applicability Condition</em>}' class. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -2548,14 +3202,6 @@ public interface EcaPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RECONFIGURATION_APPLICABILITY_CONDITION = eINSTANCE.getReconfigurationApplicabilityCondition();
-
-		/**
-		 * The meta object literal for the '<em><b>Wrapped Condition</b></em>' containment reference feature. <!--
-		 * begin-user-doc --> <!-- end-user-doc -->
-		 * 
-		 * @generated
-		 */
-		EReference RECONFIGURATION_APPLICABILITY_CONDITION__WRAPPED_CONDITION = eINSTANCE.getReconfigurationApplicabilityCondition_WrappedCondition();
 
 		/**
 		 * The meta object literal for the '{@link it.unitn.disi.zanshin.model.eca.impl.AbortStrategyImpl

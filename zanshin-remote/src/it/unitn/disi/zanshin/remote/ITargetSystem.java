@@ -65,6 +65,11 @@ public interface ITargetSystem extends Remote {
 	 * @param reqClassName
 	 */
 	void disable(String reqClassName) throws RemoteException;
+	
+	/**
+	 * TODO: document this method.
+	 */
+	void doNothing(Long sessionId) throws RemoteException;
 
 	/**
 	 * TODO: document this method.

@@ -23,12 +23,23 @@ public class ZnnSimulatedTargetSystem extends SimulatedTargetSystem {
 		this.lock = lock;
 	}
 
+	/** @see it.unitn.disi.zanshin.simulation.SimulatedTargetSystem#abort(java.lang.Long, java.lang.String) */
+	@Override
+	public void abort(Long sessionId, String awreqName) {
+		super.abort(sessionId, awreqName);
+
+		// AR1 and AR2 are aborted during AR3's session, therefore would expect to receive an abort() command.
+		synchronized (lock) {
+			lock.notifyAll();
+		}
+	}
+
 	/** @see it.unitn.disi.zanshin.simulation.SimulatedTargetSystem#applyConfig(java.util.Map) */
 	@Override
 	public void applyConfig(Map<String, String> newConfig) {
 		super.applyConfig(newConfig);
 
-		// AR1 and AR2 use reconfiguration, therefore would expect to receive an apply-config() command.
+		// AR1 and AR3 use reconfiguration, therefore would expect to receive an apply-config() command.
 		synchronized (lock) {
 			lock.notifyAll();
 		}
@@ -40,6 +51,17 @@ public class ZnnSimulatedTargetSystem extends SimulatedTargetSystem {
 		super.changeParameter(paramName, value);
 
 		// AR2 and AR3 use ChangeParameter strategy, therefore would expect to receive an change-param() command.
+		synchronized (lock) {
+			lock.notifyAll();
+		}
+	}
+
+	/** @see it.unitn.disi.zanshin.simulation.SimulatedTargetSystem#doNothing(java.lang.Long) */
+	@Override
+	public void doNothing(Long sessionId) {
+		super.doNothing(sessionId);
+		
+		// AR3 uses DoNothing strategy, therefore would expect to receive an do-nothing() command.
 		synchronized (lock) {
 			lock.notifyAll();
 		}

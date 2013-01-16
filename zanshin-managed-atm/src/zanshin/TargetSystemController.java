@@ -326,6 +326,12 @@ public class TargetSystemController implements ITargetSystem {
 		enqueueAdaptationAction(new AdaptationAction(AdaptationInstruction.DISABLE, reqClassName));
 	}
 
+	/** @see it.unitn.disi.zanshin.remote.ITargetSystem#doNothing(java.lang.Long) */
+	public void doNothing(Long sessionId) {
+		log.info("ATM Zanshin Controller received EvoReq operation from Zanshin: do-nothing() [session: {0}]", sessionId);
+		enqueueAdaptationAction(new AdaptationAction(AdaptationInstruction.DO_NOTHING, sessionId));
+	}
+
 	/** @see it.unitn.disi.zanshin.remote.ITargetSystem#enable(java.lang.String) */
 	@Override
 	public void enable(String reqClassName) {

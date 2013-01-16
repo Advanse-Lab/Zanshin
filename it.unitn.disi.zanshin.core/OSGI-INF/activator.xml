@@ -2,6 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="it.unitn.disi.zanshin.core.activator">
    <implementation class="it.unitn.disi.zanshin.core.Activator" />
    <reference bind="setControllerService" cardinality="1..1" interface="it.unitn.disi.zanshin.services.ITargetSystemControllerService" name="ITargetSystemControllerService" policy="dynamic" unbind="unsetControllerService" />
+   <reference bind="setAdaptationService" cardinality="1..1" interface="it.unitn.disi.zanshin.services.IAdaptationService" name="IAdaptationService" policy="dynamic" unbind="unsetAdaptationService" />
    <reference bind="setRepositoryService" cardinality="1..1" interface="it.unitn.disi.zanshin.services.IRepositoryService" name="IRepositoryService" policy="dynamic" unbind="unsetRepositoryService" />
    <reference bind="setMonitoringService" cardinality="1..1" interface="it.unitn.disi.zanshin.services.IMonitoringService" name="IMonitoringService" policy="dynamic" unbind="unsetMonitoringService" />
    <reference bind="addReconfigurationService" cardinality="0..n" interface="it.unitn.disi.zanshin.services.IReconfigurationService" name="IReconfigurationService" policy="dynamic" unbind="removeReconfigurationService" />

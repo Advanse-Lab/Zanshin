@@ -14,16 +14,21 @@ import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
+import it.unitn.disi.zanshin.model.eca.DoNothingStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaPackage;
 import it.unitn.disi.zanshin.model.eca.Event;
+import it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
+import it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
+import it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.RelaxDisableChildStrategy;
 import it.unitn.disi.zanshin.model.eca.RelaxReplace;
 import it.unitn.disi.zanshin.model.eca.ResolutionCondition;
@@ -187,9 +192,20 @@ public class EcaSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case EcaPackage.REFINED_APPLICABILITY_CONDITION: {
+			RefinedApplicabilityCondition refinedApplicabilityCondition = (RefinedApplicabilityCondition) theEObject;
+			T result = caseRefinedApplicabilityCondition(refinedApplicabilityCondition);
+			if (result == null)
+				result = caseApplicabilityCondition(refinedApplicabilityCondition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		case EcaPackage.AND_REFINED_APPLICABILITY_CONDITION: {
 			AndRefinedApplicabilityCondition andRefinedApplicabilityCondition = (AndRefinedApplicabilityCondition) theEObject;
 			T result = caseAndRefinedApplicabilityCondition(andRefinedApplicabilityCondition);
+			if (result == null)
+				result = caseRefinedApplicabilityCondition(andRefinedApplicabilityCondition);
 			if (result == null)
 				result = caseApplicabilityCondition(andRefinedApplicabilityCondition);
 			if (result == null)
@@ -200,7 +216,36 @@ public class EcaSwitch<T> extends Switch<T> {
 			OrRefinedApplicabilityCondition orRefinedApplicabilityCondition = (OrRefinedApplicabilityCondition) theEObject;
 			T result = caseOrRefinedApplicabilityCondition(orRefinedApplicabilityCondition);
 			if (result == null)
+				result = caseRefinedApplicabilityCondition(orRefinedApplicabilityCondition);
+			if (result == null)
 				result = caseApplicabilityCondition(orRefinedApplicabilityCondition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcaPackage.NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION: {
+			NotConcurrentWithApplicabilityCondition notConcurrentWithApplicabilityCondition = (NotConcurrentWithApplicabilityCondition) theEObject;
+			T result = caseNotConcurrentWithApplicabilityCondition(notConcurrentWithApplicabilityCondition);
+			if (result == null)
+				result = caseApplicabilityCondition(notConcurrentWithApplicabilityCondition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcaPackage.ORDER_IN_RANGE_APPLICABILITY_CONDITION: {
+			OrderInRangeApplicabilityCondition orderInRangeApplicabilityCondition = (OrderInRangeApplicabilityCondition) theEObject;
+			T result = caseOrderInRangeApplicabilityCondition(orderInRangeApplicabilityCondition);
+			if (result == null)
+				result = caseApplicabilityCondition(orderInRangeApplicabilityCondition);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcaPackage.FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION: {
+			FollowsSpecificStrategyApplicabilityCondition followsSpecificStrategyApplicabilityCondition = (FollowsSpecificStrategyApplicabilityCondition) theEObject;
+			T result = caseFollowsSpecificStrategyApplicabilityCondition(followsSpecificStrategyApplicabilityCondition);
+			if (result == null)
+				result = caseApplicabilityCondition(followsSpecificStrategyApplicabilityCondition);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -281,6 +326,8 @@ public class EcaSwitch<T> extends Switch<T> {
 			ReconfigurationApplicabilityCondition reconfigurationApplicabilityCondition = (ReconfigurationApplicabilityCondition) theEObject;
 			T result = caseReconfigurationApplicabilityCondition(reconfigurationApplicabilityCondition);
 			if (result == null)
+				result = caseRefinedApplicabilityCondition(reconfigurationApplicabilityCondition);
+			if (result == null)
 				result = caseApplicabilityCondition(reconfigurationApplicabilityCondition);
 			if (result == null)
 				result = defaultCase(theEObject);
@@ -316,6 +363,15 @@ public class EcaSwitch<T> extends Switch<T> {
 		case EcaPackage.PARAMETER_CHANGE: {
 			ParameterChange parameterChange = (ParameterChange) theEObject;
 			T result = caseParameterChange(parameterChange);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case EcaPackage.DO_NOTHING_STRATEGY: {
+			DoNothingStrategy doNothingStrategy = (DoNothingStrategy) theEObject;
+			T result = caseDoNothingStrategy(doNothingStrategy);
+			if (result == null)
+				result = caseAdaptationStrategy(doNothingStrategy);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -488,6 +544,21 @@ public class EcaSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Refined Applicability Condition</em>'. <!--
+	 * begin-user-doc --> This implementation returns null; returning a non-null result will terminate the switch. <!--
+	 * end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Refined Applicability Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRefinedApplicabilityCondition(RefinedApplicabilityCondition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>And Refined Applicability Condition</em>'.
 	 * <!-- begin-user-doc --> This implementation returns null; returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
@@ -514,6 +585,53 @@ public class EcaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOrRefinedApplicabilityCondition(OrRefinedApplicabilityCondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>Not Concurrent With Applicability Condition</em>'. <!-- begin-user-doc --> This implementation returns null;
+	 * returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>Not Concurrent With Applicability Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNotConcurrentWithApplicabilityCondition(NotConcurrentWithApplicabilityCondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Order In Range Applicability Condition</em>'.
+	 * <!-- begin-user-doc --> This implementation returns null; returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Order In Range Applicability Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrderInRangeApplicabilityCondition(OrderInRangeApplicabilityCondition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '
+	 * <em>Follows Specific Strategy Applicability Condition</em>'. <!-- begin-user-doc --> This implementation returns
+	 * null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '
+	 *         <em>Follows Specific Strategy Applicability Condition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFollowsSpecificStrategyApplicabilityCondition(FollowsSpecificStrategyApplicabilityCondition object) {
 		return null;
 	}
 
@@ -630,6 +748,20 @@ public class EcaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameterChange(ParameterChange object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Do Nothing Strategy</em>'. <!-- begin-user-doc
+	 * --> This implementation returns null; returning a non-null result will terminate the switch. <!-- end-user-doc -->
+	 * 
+	 * @param object
+	 *          the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Do Nothing Strategy</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDoNothingStrategy(DoNothingStrategy object) {
 		return null;
 	}
 

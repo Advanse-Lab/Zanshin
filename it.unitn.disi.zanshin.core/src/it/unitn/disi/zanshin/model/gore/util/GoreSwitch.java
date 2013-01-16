@@ -101,6 +101,12 @@ public class GoreSwitch<T> extends Switch<T> {
 			Softgoal softgoal = (Softgoal) theEObject;
 			T result = caseSoftgoal(softgoal);
 			if (result == null)
+				result = caseGoal(softgoal);
+			if (result == null)
+				result = casePerformativeRequirement(softgoal);
+			if (result == null)
+				result = caseDefinableRequirement(softgoal);
+			if (result == null)
 				result = caseRequirement(softgoal);
 			if (result == null)
 				result = caseOclAny(softgoal);

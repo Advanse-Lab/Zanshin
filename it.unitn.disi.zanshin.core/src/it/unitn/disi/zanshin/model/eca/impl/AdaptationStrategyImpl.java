@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  * <ul>
  * <li>{@link it.unitn.disi.zanshin.model.eca.impl.AdaptationStrategyImpl#getAwReq <em>Aw Req</em>}</li>
  * <li>{@link it.unitn.disi.zanshin.model.eca.impl.AdaptationStrategyImpl#getCondition <em>Condition</em>}</li>
+ * <li>{@link it.unitn.disi.zanshin.model.eca.impl.AdaptationStrategyImpl#isUseful <em>Useful</em>}</li>
  * </ul>
  * </p>
  * 
@@ -43,6 +44,25 @@ public abstract class AdaptationStrategyImpl extends EObjectImpl implements Adap
 	 * @ordered
 	 */
 	protected ApplicabilityCondition condition;
+
+	/**
+	 * The default value of the '{@link #isUseful() <em>Useful</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @see #isUseful()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean USEFUL_EDEFAULT = true;
+	/**
+	 * The cached value of the '{@link #isUseful() <em>Useful</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @see #isUseful()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean useful = USEFUL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -157,6 +177,27 @@ public abstract class AdaptationStrategyImpl extends EObjectImpl implements Adap
 	 * 
 	 * @generated
 	 */
+	public boolean isUseful() {
+		return useful;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public void setUseful(boolean newUseful) {
+		boolean oldUseful = useful;
+		useful = newUseful;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, EcaPackage.ADAPTATION_STRATEGY__USEFUL, oldUseful, useful));
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public void execute(AdaptationSession session) {
 		// This method is not supposed to be called.
 		it.unitn.disi.zanshin.core.CoreUtils.log.error("Method AdaptationStrategyImpl.execute() has been called, but this method is not meant to be called!"); //$NON-NLS-1$
@@ -235,6 +276,8 @@ public abstract class AdaptationStrategyImpl extends EObjectImpl implements Adap
 			return getAwReq();
 		case EcaPackage.ADAPTATION_STRATEGY__CONDITION:
 			return getCondition();
+		case EcaPackage.ADAPTATION_STRATEGY__USEFUL:
+			return isUseful();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -252,6 +295,9 @@ public abstract class AdaptationStrategyImpl extends EObjectImpl implements Adap
 			return;
 		case EcaPackage.ADAPTATION_STRATEGY__CONDITION:
 			setCondition((ApplicabilityCondition) newValue);
+			return;
+		case EcaPackage.ADAPTATION_STRATEGY__USEFUL:
+			setUseful((Boolean) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -271,6 +317,9 @@ public abstract class AdaptationStrategyImpl extends EObjectImpl implements Adap
 		case EcaPackage.ADAPTATION_STRATEGY__CONDITION:
 			setCondition((ApplicabilityCondition) null);
 			return;
+		case EcaPackage.ADAPTATION_STRATEGY__USEFUL:
+			setUseful(USEFUL_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -287,8 +336,27 @@ public abstract class AdaptationStrategyImpl extends EObjectImpl implements Adap
 			return getAwReq() != null;
 		case EcaPackage.ADAPTATION_STRATEGY__CONDITION:
 			return condition != null;
+		case EcaPackage.ADAPTATION_STRATEGY__USEFUL:
+			return useful != USEFUL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy())
+			return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (useful: "); //$NON-NLS-1$
+		result.append(useful);
+		result.append(')');
+		return result.toString();
 	}
 
 } // AdaptationStrategyImpl

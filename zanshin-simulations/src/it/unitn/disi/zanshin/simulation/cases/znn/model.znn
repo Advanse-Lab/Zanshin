@@ -1,50 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <znn:ZnnGoalModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eca="http://disi.unitn.it/zanshin/1.0/eca" xmlns:znn="http://disi.unitn.it/zanshin/1.0/znn">
-  <rootGoal xsi:type="znn:G_ServeNews">
-    <children xsi:type="znn:T_TextOnly"/>
-    <children xsi:type="znn:T_Multimedia" />
-
-	<!-- Softgoals -->
-    <children xsi:type="znn:S_CostEfficiency" constraints="//@rootGoal/@children.5"/>	<!-- //@rootGoal/@children.2 -->
-    <children xsi:type="znn:S_FastResponse" constraints="//@rootGoal/@children.6"/>
-    <children xsi:type="znn:S_HiFi" constraints="//@rootGoal/@children.7"/>
-
-	<!-- Quality Constraints -->
-    <children xsi:type="znn:Q_SingleServer" softgoal="//@rootGoal/@children.2"/>		<!-- //@rootGoal/@children.5 -->
-    <children xsi:type="znn:Q_RespTimeUnderMax" softgoal="//@rootGoal/@children.3"/>
-    <children xsi:type="znn:Q_Multimedia" softgoal="//@rootGoal/@children.4"/>
+  <rootGoal xsi:type="znn:G_RunPortal">
+    <children xsi:type="znn:S_CostEfficiency" refinementType="or">					<!-- //@rootGoal/@children.0 -->
+      <children xsi:type="znn:Q_SingleServer" />
+      <children xsi:type="znn:Q_RespTimeOverMin" />
+    </children>
+    <children xsi:type="znn:G_ServeNews" refinementType="or">						<!-- //@rootGoal/@children.1 -->
+	    <children xsi:type="znn:T_TextOnly"/>
+	    <children xsi:type="znn:T_ServeLowRes" />
+	    <children xsi:type="znn:T_ServeHighRes" />
+    </children>
+    <children xsi:type="znn:S_HiFi" refinementType="or">							<!-- //@rootGoal/@children.2 -->
+      <children xsi:type="znn:Q_HighResolution" />
+      <children xsi:type="znn:Q_RespTimeOverMin" />
+    </children>
+    <children xsi:type="znn:S_HighPerformance">										<!-- //@rootGoal/@children.3 -->
+      <children xsi:type="znn:Q_RespTimeUnderMax" />
+    </children>
 
 	<!-- AwReqs -->
-    <children xsi:type="znn:AR1" target="//@rootGoal/@children.5">						<!-- //@rootGoal/@children.8 -->
+    <children xsi:type="znn:AR1" target="//@rootGoal/@children.0">					<!-- //@rootGoal/@children.4 -->
       <condition xsi:type="eca:ReconfigurationResolutionCondition"/>
       <strategies xsi:type="eca:ReconfigurationStrategy" algorithmId="qualia">
-        <condition xsi:type="eca:ReconfigurationApplicabilityCondition"/>
+        <condition xsi:type="eca:ReconfigurationApplicabilityCondition">
+          <children xsi:type="eca:NotConcurrentWithApplicabilityCondition" awreqs="//@rootGoal/@children.6"/>
+        </condition>
       </strategies>
     </children>
-    <children xsi:type="znn:AR2" target="//@rootGoal/@children.6">
-      <condition xsi:type="eca:ReconfigurationResolutionCondition"/>
-      <strategies xsi:type="eca:ReconfigurationStrategy" algorithmId="qualia">
-        <condition xsi:type="eca:ReconfigurationApplicabilityCondition"/>
-      </strategies>
-      <strategies xsi:type="eca:ChangeParameterStrategy">
-      	<changes xsi:type="eca:ParameterChange" param="//@configuration/@parameters.1" value="T_TextOnly"/>
-        <condition xsi:type="eca:SimpleApplicabilityCondition"/>
-      </strategies>
-    </children>
-    <children xsi:type="znn:AR3" target="//@rootGoal/@children.7">
+
+    <children xsi:type="znn:AR2" target="//@rootGoal/@children.2">					<!-- //@rootGoal/@children.5 -->
       <condition xsi:type="eca:SimpleResolutionCondition"/>
       <strategies xsi:type="eca:ChangeParameterStrategy">
-      	<changes xsi:type="eca:ParameterChange" param="//@configuration/@parameters.1" value="T_Multimedia"/>
-        <condition xsi:type="eca:SimpleApplicabilityCondition"/>
+      	<changes xsi:type="eca:ParameterChange" param="//@configuration/@parameters.1" value="T_ServeHighRes"/>
+        <condition xsi:type="eca:NotConcurrentWithApplicabilityCondition" awreqs="//@rootGoal/@children.6"/>
+      </strategies>
+    </children>
+    
+    <children xsi:type="znn:AR3" target="//@rootGoal/@children.3">					<!-- //@rootGoal/@children.6 -->
+      <!-- TODO: although the simulation works, this is not the proper resolution condition for AR3! -->
+      <condition xsi:type="eca:SimpleResolutionCondition"/>
+      
+      <strategies xsi:type="eca:ReconfigurationStrategy" algorithmId="qualia">
+        <condition xsi:type="eca:ReconfigurationApplicabilityCondition">
+          <children xsi:type="eca:OrderInRangeApplicabilityCondition" lowerBound="1" upperBound="1"/>
+        </condition>
+      </strategies>
+      
+      <strategies xsi:type="eca:DoNothingStrategy">
+      	<condition xsi:type="eca:FollowsSpecificStrategyApplicabilityCondition" maxDelay="1000" strategyToFollow="//@rootGoal/@children.6/@strategies.0" />
+      </strategies>
+      
+      <strategies xsi:type="eca:ChangeParameterStrategy">
+      	<changes xsi:type="eca:ParameterChange" param="//@configuration/@parameters.1" value="T_TextOnly"/>
+        <condition xsi:type="eca:FollowsSpecificStrategyApplicabilityCondition" minDelay="1000" strategyToFollow="//@rootGoal/@children.6/@strategies.0" />
+      </strategies>
+
+      <strategies xsi:type="eca:DoNothingStrategy">
+      	<condition xsi:type="eca:FollowsSpecificStrategyApplicabilityCondition" maxDelay="3000" strategyToFollow="//@rootGoal/@children.6/@strategies.2" />
       </strategies>
     </children>
   </rootGoal>
-  
+
   <!-- Parameters and relations. -->
   <configuration>
     <parameters xsi:type="znn:CV_NoS" unit="1" value="1" metric="integer"/>
     <parameters xsi:type="znn:VP1" type="vp"/>
   </configuration>
-  <relations indicator="//@rootGoal/@children.8" parameter="//@configuration/@parameters.0" lowerBound="1" upperBound="3" operator="ft"/>
-  <relations indicator="//@rootGoal/@children.9" parameter="//@configuration/@parameters.0" lowerBound="1" upperBound="3" operator="gt"/>
+  <relations indicator="//@rootGoal/@children.4" parameter="//@configuration/@parameters.0" lowerBound="1" upperBound="3" operator="ft"/>
+  <relations indicator="//@rootGoal/@children.6" parameter="//@configuration/@parameters.0" lowerBound="1" upperBound="3" operator="gt"/>
 </znn:ZnnGoalModel>

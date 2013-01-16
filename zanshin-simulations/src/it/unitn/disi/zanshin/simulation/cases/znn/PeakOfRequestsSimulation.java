@@ -13,14 +13,8 @@ public class PeakOfRequestsSimulation extends AbstractZnnSimulation {
 	/** The logger. */
 	private static final Logger log = new Logger(PeakOfRequestsSimulation.class);
 
-	/**
-	 * The maximum number of servers, so we repeat the peak of requests simulation. Should be the same as the upperBound
-	 * parameter of the differential relations of CV_NoS.
-	 */
-	private static final int MAX_SERVERS = 3;
-
-	/** A simulation part that is repeated to increase the number of servers to the maximum. */
-	private final SimulationPart peakPart = new SimulationPart() {
+	/** A simulation part that triggers a failure of AR1. */
+	private final SimulationPart ar1FailurePart = new SimulationPart() {
 		@Override
 		public boolean shouldWait() {
 			return true;
@@ -32,17 +26,17 @@ public class PeakOfRequestsSimulation extends AbstractZnnSimulation {
 			sessionId = zanshin.createUserSession(targetSystemId);
 			log.info("Created a new user session with id: {0}", sessionId); //$NON-NLS-1$
 
-			// Simulating a peak of requests that makes AR2 fail.
-			zanshin.logRequirementStart(targetSystemId, sessionId, Q_RESP_TIME_UNDER_MAX);
-			zanshin.logRequirementFailure(targetSystemId, sessionId, Q_RESP_TIME_UNDER_MAX);
-			
+			// Simulating a failure of AR1.
+			zanshin.logRequirementStart(targetSystemId, sessionId, S_COST_EFFICIENCY);
+			zanshin.logRequirementFailure(targetSystemId, sessionId, S_COST_EFFICIENCY);
+
 			// Ends the user session (request fulfilled).
 			zanshin.disposeUserSession(targetSystemId, sessionId);
 		}
 	};
-	
-	/** A simulation part that is repeated to decrease the number of servers to the minimum. */
-	private final SimulationPart offPeakPart = new SimulationPart() {
+
+	/** A simulation part that triggers a failure of AR2. */
+	private final SimulationPart ar2FailurePart = new SimulationPart() {
 		@Override
 		public boolean shouldWait() {
 			return true;
@@ -54,12 +48,48 @@ public class PeakOfRequestsSimulation extends AbstractZnnSimulation {
 			sessionId = zanshin.createUserSession(targetSystemId);
 			log.info("Created a new user session with id: {0}", sessionId); //$NON-NLS-1$
 
-			// Simulating a peak of requests that makes AR1 fail.
-			zanshin.logRequirementStart(targetSystemId, sessionId, Q_SINGLE_SERVER);
-			zanshin.logRequirementFailure(targetSystemId, sessionId, Q_SINGLE_SERVER);
-			
+			// Simulating a failure of AR2.
+			zanshin.logRequirementStart(targetSystemId, sessionId, S_HI_FI);
+			zanshin.logRequirementFailure(targetSystemId, sessionId, S_HI_FI);
+
 			// Ends the user session (request fulfilled).
 			zanshin.disposeUserSession(targetSystemId, sessionId);
+		}
+	};
+
+	/** A simulation part that triggers a failure of AR3. */
+	private final SimulationPart ar3FailurePart = new SimulationPart() {
+		@Override
+		public boolean shouldWait() {
+			return true;
+		}
+
+		@Override
+		public void run() throws Exception {
+			// Creates a user session, as if someone were requesting news from ZNN.com.
+			sessionId = zanshin.createUserSession(targetSystemId);
+			log.info("Created a new user session with id: {0}", sessionId); //$NON-NLS-1$
+
+			// Simulating a failure of AR3.
+			zanshin.logRequirementStart(targetSystemId, sessionId, S_HIGH_PERFORMANCE);
+			zanshin.logRequirementFailure(targetSystemId, sessionId, S_HIGH_PERFORMANCE);
+
+			// Ends the user session (request fulfilled).
+			zanshin.disposeUserSession(targetSystemId, sessionId);
+		}
+	};
+
+	/** A simulation part for waiting. */
+	private final SimulationPart waitOneSecondPart = new SimulationPart() {
+		@Override
+		public boolean shouldWait() {
+			return false;
+		}
+
+		@Override
+		public void run() throws Exception {
+			log.info("Waiting for a second..."); //$NON-NLS-1$
+			Thread.sleep(1000);
 		}
 	};
 
@@ -69,34 +99,80 @@ public class PeakOfRequestsSimulation extends AbstractZnnSimulation {
 		// Registers ZNN.com as target system in Zanshin.
 		registerTargetSystem();
 
-		// Adds the parts that simulate the peak of requests, to increase the number of servers and change the fidelity.
-		for (int i = 0; i < MAX_SERVERS; i++)
-			parts.add(peakPart);
+		// Due to a peak of requests, AR3 fails. ZNN.com should add a new server.
+		parts.add(ar3FailurePart);
+
+		// For the next 1000ms, further failures will be ignored.
+		parts.add(ar3FailurePart);
+		parts.add(ar3FailurePart);
+		parts.add(waitOneSecondPart);
 		
-		// Adds the part that simulate the text-only version not being necessary anymore, switching back to multimedia.
+		// Failures of AR1 and AR2 during AR3's adaptation session should generate aborts.
+		parts.add(ar1FailurePart);
+		parts.add(ar2FailurePart);		
+
+		// If AR3 keeps failing after the waiting time, ZNN.com should switch to text-only mode.
+		parts.add(ar3FailurePart);
+
+		// For the next 3000ms, further failures will be ignored.
+		parts.add(ar3FailurePart);
+		parts.add(ar3FailurePart);
+		parts.add(ar3FailurePart);
+		parts.add(waitOneSecondPart);
+		parts.add(waitOneSecondPart);
+		parts.add(waitOneSecondPart);
+
+		// Simulates the satisfaction of AR3 (end of peak of requests) and waits 1s just for syncronization purposes.
 		parts.add(new SimulationPart() {
 			@Override
 			public boolean shouldWait() {
-				return true;
+				return false;
 			}
-			
+
 			@Override
 			public void run() throws Exception {
 				// Creates a user session, as if someone were requesting news from ZNN.com.
 				sessionId = zanshin.createUserSession(targetSystemId);
 				log.info("Created a new user session with id: {0}", sessionId); //$NON-NLS-1$
 
-				// Simulating a peak of requests that makes AR1 fail.
-				zanshin.logRequirementStart(targetSystemId, sessionId, Q_MULTIMEDIA);
-				zanshin.logRequirementFailure(targetSystemId, sessionId, Q_MULTIMEDIA);
-				
+				// Simulating the success of AR3.
+				log.info("End of the peak of requests..."); //$NON-NLS-1$
+				zanshin.logRequirementStart(targetSystemId, sessionId, S_HIGH_PERFORMANCE);
+				zanshin.logRequirementSuccess(targetSystemId, sessionId, S_HIGH_PERFORMANCE);
+
 				// Ends the user session (request fulfilled).
 				zanshin.disposeUserSession(targetSystemId, sessionId);
 			}
 		});
+		parts.add(waitOneSecondPart);
 		
-		// Adds the parts that simulate the number of requests diminishing, to decrease the number of servers.
-		for (int i = 1; i < MAX_SERVERS; i++)
-			parts.add(offPeakPart);
+		// Now that the peak of requests has ended, AR1 and AR2 fail, bringing ZNN.com back to normal.
+		parts.add(ar1FailurePart);
+		parts.add(ar2FailurePart);		
+		
+		// Simulates the satisfaction of AR1 and AR2, to conclude.
+		parts.add(new SimulationPart() {
+			@Override
+			public boolean shouldWait() {
+				return false;
+			}
+
+			@Override
+			public void run() throws Exception {
+				// Creates a user session, as if someone were requesting news from ZNN.com.
+				sessionId = zanshin.createUserSession(targetSystemId);
+				log.info("Created a new user session with id: {0}", sessionId); //$NON-NLS-1$
+
+				// Simulating the success of AR1 and AR2.
+				log.info("ZNN.com is back to normal!"); //$NON-NLS-1$
+				zanshin.logRequirementStart(targetSystemId, sessionId, S_COST_EFFICIENCY);
+				zanshin.logRequirementSuccess(targetSystemId, sessionId, S_COST_EFFICIENCY);
+				zanshin.logRequirementStart(targetSystemId, sessionId, S_HI_FI);
+				zanshin.logRequirementSuccess(targetSystemId, sessionId, S_HI_FI);
+
+				// Ends the user session (request fulfilled).
+				zanshin.disposeUserSession(targetSystemId, sessionId);
+			}
+		});
 	}
 }

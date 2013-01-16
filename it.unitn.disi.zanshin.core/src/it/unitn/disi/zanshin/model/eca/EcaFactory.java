@@ -92,6 +92,15 @@ public interface EcaFactory extends EFactory {
 	MaxExecutionsPerSessionApplicabilityCondition createMaxExecutionsPerSessionApplicabilityCondition();
 
 	/**
+	 * Returns a new object of class '<em>Refined Applicability Condition</em>'. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
+	 * @return a new object of class '<em>Refined Applicability Condition</em>'.
+	 * @generated
+	 */
+	RefinedApplicabilityCondition createRefinedApplicabilityCondition();
+
+	/**
 	 * Returns a new object of class '<em>And Refined Applicability Condition</em>'. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
 	 * 
@@ -108,6 +117,33 @@ public interface EcaFactory extends EFactory {
 	 * @generated
 	 */
 	OrRefinedApplicabilityCondition createOrRefinedApplicabilityCondition();
+
+	/**
+	 * Returns a new object of class '<em>Not Concurrent With Applicability Condition</em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Not Concurrent With Applicability Condition</em>'.
+	 * @generated
+	 */
+	NotConcurrentWithApplicabilityCondition createNotConcurrentWithApplicabilityCondition();
+
+	/**
+	 * Returns a new object of class '<em>Order In Range Applicability Condition</em>'. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Order In Range Applicability Condition</em>'.
+	 * @generated
+	 */
+	OrderInRangeApplicabilityCondition createOrderInRangeApplicabilityCondition();
+
+	/**
+	 * Returns a new object of class '<em>Follows Specific Strategy Applicability Condition</em>'. <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Follows Specific Strategy Applicability Condition</em>'.
+	 * @generated
+	 */
+	FollowsSpecificStrategyApplicabilityCondition createFollowsSpecificStrategyApplicabilityCondition();
 
 	/**
 	 * Returns a new object of class '<em>Retry Strategy</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -174,6 +210,14 @@ public interface EcaFactory extends EFactory {
 	 * @generated
 	 */
 	ParameterChange createParameterChange();
+
+	/**
+	 * Returns a new object of class '<em>Do Nothing Strategy</em>'. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @return a new object of class '<em>Do Nothing Strategy</em>'.
+	 * @generated
+	 */
+	DoNothingStrategy createDoNothingStrategy();
 
 	/**
 	 * Returns a new object of class '<em>Reconfiguration Applicability Condition</em>'. <!-- begin-user-doc --> <!--

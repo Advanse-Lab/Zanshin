@@ -46,6 +46,22 @@ public interface AdaptationSession extends EObject {
 	EList<Event> getEvents();
 
 	/**
+	 * Returns the value of the '<em><b>Events With Useful Strategies</b></em>' reference list. The list contents are of
+	 * type {@link it.unitn.disi.zanshin.model.eca.Event}. <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Events With Useful Strategies</em>' reference list isn't clear, there really should be
+	 * more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Events With Useful Strategies</em>' reference list.
+	 * @see it.unitn.disi.zanshin.model.eca.EcaPackage#getAdaptationSession_EventsWithUsefulStrategies()
+	 * @model
+	 * @generated
+	 */
+	EList<Event> getEventsWithUsefulStrategies();
+
+	/**
 	 * Returns the value of the '<em><b>Active</b></em>' attribute. <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Active</em>' attribute isn't clear, there really should be more of a description here...
@@ -101,10 +117,10 @@ public interface AdaptationSession extends EObject {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='// Creates a new event with the current date/time, associated with the given AwReq, and adds it to the timeline.\nit.unitn.disi.zanshin.model.eca.Event event = it.unitn.disi.zanshin.model.eca.EcaFactory.eINSTANCE.createEvent();\nevent.setTime(new java.util.Date(System.currentTimeMillis()));\nevent.setAwReq(awreq);\ngetEvents().add(event);\n\n// If this is the first event of the session, produce its id.\nif (getEvents().size() == 1) {\n\tStringBuilder builder = new StringBuilder();\n\tjava.text.DateFormat dateFormat = new java.text.SimpleDateFormat(\"yyyy-MM-dd HH:mm:ss.SSS\"); //$NON-NLS-1$\n\tbuilder.append(\"(Session: \").append(awreq.eClass().getName()); //$NON-NLS-1$\n\tbuilder.append(\" / \").append(dateFormat.format(event.getTime())).append(\")\"); //$NON-NLS-1$ //$NON-NLS-2$\n\tsetId(builder.toString());\n}'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='// Creates a new event with the current date/time, associated with the given AwReq, and adds it to the timeline.\nit.unitn.disi.zanshin.model.eca.Event event = it.unitn.disi.zanshin.model.eca.EcaFactory.eINSTANCE.createEvent();\nevent.setTime(new java.util.Date(System.currentTimeMillis()));\nevent.setAwReq(awreq);\ngetEvents().add(event);\n\n// If this is the first event of the session, produce its id.\nif (getEvents().size() == 1) {\n\tStringBuilder builder = new StringBuilder();\n\tjava.text.DateFormat dateFormat = new java.text.SimpleDateFormat(\"yyyy-MM-dd HH:mm:ss.SSS\"); //$NON-NLS-1$\n\tbuilder.append(\"(Session: \").append(awreq.eClass().getName()); //$NON-NLS-1$\n\tbuilder.append(\" / \").append(dateFormat.format(event.getTime())).append(\")\"); //$NON-NLS-1$ //$NON-NLS-2$\n\tsetId(builder.toString());\n}\n\nreturn event;'"
 	 * @generated
 	 */
-	void addEvent(EcaAwReq awreq);
+	Event addEvent(EcaAwReq awreq);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->

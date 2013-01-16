@@ -94,6 +94,13 @@ public interface ITargetSystemControllerService {
 	void disable(EClass reqClass);
 
 	/**
+	 * TODO: document this method.
+	 * 
+	 * @param model
+	 */
+	void doNothing(GoalModel model);
+
+	/**
 	 * From now on, the target system should resume trying to satisfy the specified requirement. If it is an AwReq, the
 	 * adaptation framework should resume evaluating it. To do this at the instance level, use resume().
 	 * 

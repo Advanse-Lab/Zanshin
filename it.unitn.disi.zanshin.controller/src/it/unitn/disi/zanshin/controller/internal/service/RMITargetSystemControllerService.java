@@ -221,6 +221,23 @@ public class RMITargetSystemControllerService implements ITargetSystemController
 		}
 	}
 
+	/** @see it.unitn.disi.zanshin.services.ITargetSystemControllerService#doNothing(it.unitn.disi.zanshin.model.gore.GoalModel) */
+	@Override
+	public void doNothing(GoalModel model) {
+		ControllerUtils.log.debug("RMI Target System Controller forwarding instruction: do-nothing()"); //$NON-NLS-1$
+
+		// Retrieves the session id and a reference to the target system responsible for this requirement instance.
+		Long sessionId = model.getId();
+		ITargetSystem targetSystem = retrieveTargetSystem(model.eClass());
+
+		// Sends the instruction to the target system.
+		try {
+			targetSystem.doNothing(sessionId);
+		}
+		catch (RemoteException e) {
+			ControllerUtils.log.error("Error communicating with target system.", e); //$NON-NLS-1$
+		}
+	}
 	/** @see it.unitn.disi.zanshin.services.ITargetSystemControllerService#enable(org.eclipse.emf.ecore.EClass) */
 	@Override
 	public void enable(EClass reqClass) {

@@ -7,6 +7,7 @@ import it.unitn.disi.zanshin.model.eca.AdaptationStrategy;
 import it.unitn.disi.zanshin.model.eca.ApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaFactory;
+import it.unitn.disi.zanshin.model.eca.Event;
 import it.unitn.disi.zanshin.model.eca.ResolutionCondition;
 import it.unitn.disi.zanshin.model.gore.AwReq;
 import it.unitn.disi.zanshin.model.gore.Requirement;
@@ -39,6 +40,11 @@ public class EcaBasedAdaptationService implements IAdaptationService {
 
 	/** ECA-based model EMF factory used to create new adaptation sessions. */
 	private EcaFactory ecaFactory = EcaFactory.eINSTANCE;
+
+	/** @see it.unitn.disi.zanshin.services.IAdaptationService#getActiveSessions() */
+	public Map<EClass, AdaptationSession> getActiveSessions() {
+		return activeSessions;
+	}
 
 	/** @see it.unitn.disi.zanshin.services.IAdaptationService#processStateChange(it.unitn.disi.zanshin.model.gore.AwReq) */
 	@Override
@@ -78,9 +84,10 @@ public class EcaBasedAdaptationService implements IAdaptationService {
 
 			// If there's no active sessions for this AwReq, creates one.
 			AdaptationSession session = activeSessions.get(awreqClass);
+			Event awreqEvent = null;
 			if (session == null) {
 				session = ecaFactory.createAdaptationSession();
-				session.addEvent(ecaAwReq);
+				awreqEvent = session.addEvent(ecaAwReq);
 				activeSessions.put(awreqClass, session);
 				AdaptationUtils.log.info("{0} Created new session for {1}", session.getId(), awreqName); //$NON-NLS-1$
 			}
@@ -88,7 +95,7 @@ public class EcaBasedAdaptationService implements IAdaptationService {
 			// If there is, adds the current AwReq's evaluation to the session.
 			else {
 				AdaptationUtils.log.info("{0} Retrieved existing session for {1}, {2,choice,0#no events|1#one event|1<{2} events} already in the timeline", session.getId(), awreqName, session.getEvents().size()); //$NON-NLS-1$
-				session.addEvent(ecaAwReq);
+				awreqEvent = session.addEvent(ecaAwReq);
 			}
 
 			// Checks if the problem this adaptation session is dealing with has been solved. If so, stop.
@@ -124,6 +131,10 @@ public class EcaBasedAdaptationService implements IAdaptationService {
 			AdaptationUtils.log.info("{0} Selected adaptation strategy: {1}", session.getId(), strategyName); //$NON-NLS-1$
 			selectedStrategy.execute(session);
 			ecaAwReq.setSelectedStrategy(selectedStrategy);
+			
+			// If the applied strategy was useful, add it to the strategies timeline.
+			if (selectedStrategy.isUseful())
+				session.getEventsWithUsefulStrategies().add(awreqEvent);
 
 			// Checks the resolution again, just to terminate the session if it has.
 			verifyResolution(session, awreqCondition, awreqClass);

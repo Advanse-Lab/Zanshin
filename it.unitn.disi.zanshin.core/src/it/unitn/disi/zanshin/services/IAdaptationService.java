@@ -1,6 +1,11 @@
 package it.unitn.disi.zanshin.services;
 
+import it.unitn.disi.zanshin.model.eca.AdaptationSession;
 import it.unitn.disi.zanshin.model.gore.AwReq;
+
+import java.util.Map;
+
+import org.eclipse.emf.ecore.EClass;
 
 /**
  * Interface that defines the Adaptation Service. This service is called when an Awareness Requirement changes its state
@@ -15,6 +20,13 @@ import it.unitn.disi.zanshin.model.gore.AwReq;
  * @version 1.0
  */
 public interface IAdaptationService {
+	/**
+	 * Returns the map of active sessions related to AwReq failures.
+	 * 
+	 * @return The map of active sessions.
+	 */
+	Map<EClass, AdaptationSession> getActiveSessions();
+
 	/**
 	 * Method called by the monitoring service, indicating the given AwReq instance has changed its state.
 	 * 

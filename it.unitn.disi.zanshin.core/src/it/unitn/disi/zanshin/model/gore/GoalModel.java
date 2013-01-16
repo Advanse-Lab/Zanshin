@@ -161,7 +161,7 @@ public interface GoalModel extends EObject {
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
-	 *        "http://www.eclipse.org/emf/2002/GenModel body='// Filters the relations by indicator and parameter.\nEList<DifferentialRelation> filteredRelations = filterRelations(indicator, parameter);\n\n// Creates a fake parameter for the value comparison.\nit.unitn.disi.zanshin.model.gore.Parameter param = parameter.createCopy();\nparam.setValue(value);\n\n// Looks for a relation in which value is within bounds. Returns the first one found.\nfor (DifferentialRelation relation : filteredRelations) \n\tif (param.withinBoundsOf(relation))\n\t\treturn relation;\n\n// If not found, return null.\nreturn null;'"
+	 *        "http://www.eclipse.org/emf/2002/GenModel body='// Filters the relations by indicator and parameter.\nEList<DifferentialRelation> filteredRelations = filterRelations(indicator, parameter);\n\n// Creates a fake parameter for the value comparison.\nit.unitn.disi.zanshin.model.gore.Parameter param = parameter.createCopy();\nparam.setValue(value);\n\n// Looks for a relation in which a param with this value is incrementable. Returns the first one found.\nfor (DifferentialRelation relation : filteredRelations)\n\tif (param.incrementableIn(relation))\n\t\treturn relation;\n\n// If not found, return null.\nreturn null;'"
 	 * @generated
 	 */
 	DifferentialRelation filterRelations(AwReq indicator, Parameter parameter, String value);

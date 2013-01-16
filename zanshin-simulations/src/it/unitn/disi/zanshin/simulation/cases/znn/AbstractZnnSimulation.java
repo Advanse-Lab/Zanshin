@@ -26,13 +26,13 @@ public abstract class AbstractZnnSimulation extends AbstractSimulation {
 	protected static final String MODEL_FILE_PATH = BASE_PATH + "model.znn"; //$NON-NLS-1$
 	
 	/** TODO: document this field. */
-	protected static final String Q_SINGLE_SERVER = "Q_SingleServer"; //$NON-NLS-1$
+	protected static final String S_COST_EFFICIENCY = "S_CostEfficiency"; //$NON-NLS-1$
 	
 	/** TODO: document this field. */
-	protected static final String Q_RESP_TIME_UNDER_MAX = "Q_RespTimeUnderMax"; //$NON-NLS-1$
+	protected static final String S_HI_FI = "S_HiFi"; //$NON-NLS-1$
 	
 	/** TODO: document this field. */
-	protected static final String Q_MULTIMEDIA = "Q_Multimedia"; //$NON-NLS-1$
+	protected static final String S_HIGH_PERFORMANCE = "S_HighPerformance"; //$NON-NLS-1$
 	
 	/** TODO: document this field. */
 	protected static Object lock = new Object();

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -47,6 +48,16 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 	 * @ordered
 	 */
 	protected EList<Event> events;
+
+	/**
+	 * The cached value of the '{@link #getEventsWithUsefulStrategies() <em>Events With Useful Strategies</em>}' reference
+	 * list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @see #getEventsWithUsefulStrategies()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Event> eventsWithUsefulStrategies;
 
 	/**
 	 * The default value of the '{@link #isActive() <em>Active</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
@@ -122,6 +133,18 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 	 * 
 	 * @generated
 	 */
+	public EList<Event> getEventsWithUsefulStrategies() {
+		if (eventsWithUsefulStrategies == null) {
+			eventsWithUsefulStrategies = new EObjectResolvingEList<Event>(Event.class, this, EcaPackage.ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES);
+		}
+		return eventsWithUsefulStrategies;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public boolean isActive() {
 		return active;
 	}
@@ -164,7 +187,7 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 	 * 
 	 * @generated
 	 */
-	public void addEvent(EcaAwReq awreq) {
+	public Event addEvent(EcaAwReq awreq) {
 		// Creates a new event with the current date/time, associated with the given AwReq, and adds it to the timeline.
 		it.unitn.disi.zanshin.model.eca.Event event = it.unitn.disi.zanshin.model.eca.EcaFactory.eINSTANCE.createEvent();
 		event.setTime(new java.util.Date(System.currentTimeMillis()));
@@ -179,6 +202,8 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 			builder.append(" / ").append(dateFormat.format(event.getTime())).append(")"); //$NON-NLS-1$ //$NON-NLS-2$
 			setId(builder.toString());
 		}
+
+		return event;
 	}
 
 	/**
@@ -229,6 +254,8 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 		switch (featureID) {
 		case EcaPackage.ADAPTATION_SESSION__EVENTS:
 			return getEvents();
+		case EcaPackage.ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES:
+			return getEventsWithUsefulStrategies();
 		case EcaPackage.ADAPTATION_SESSION__ACTIVE:
 			return isActive();
 		case EcaPackage.ADAPTATION_SESSION__ID:
@@ -249,6 +276,10 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 		case EcaPackage.ADAPTATION_SESSION__EVENTS:
 			getEvents().clear();
 			getEvents().addAll((Collection<? extends Event>) newValue);
+			return;
+		case EcaPackage.ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES:
+			getEventsWithUsefulStrategies().clear();
+			getEventsWithUsefulStrategies().addAll((Collection<? extends Event>) newValue);
 			return;
 		case EcaPackage.ADAPTATION_SESSION__ACTIVE:
 			setActive((Boolean) newValue);
@@ -271,6 +302,9 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 		case EcaPackage.ADAPTATION_SESSION__EVENTS:
 			getEvents().clear();
 			return;
+		case EcaPackage.ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES:
+			getEventsWithUsefulStrategies().clear();
+			return;
 		case EcaPackage.ADAPTATION_SESSION__ACTIVE:
 			setActive(ACTIVE_EDEFAULT);
 			return;
@@ -291,6 +325,8 @@ public class AdaptationSessionImpl extends EObjectImpl implements AdaptationSess
 		switch (featureID) {
 		case EcaPackage.ADAPTATION_SESSION__EVENTS:
 			return events != null && !events.isEmpty();
+		case EcaPackage.ADAPTATION_SESSION__EVENTS_WITH_USEFUL_STRATEGIES:
+			return eventsWithUsefulStrategies != null && !eventsWithUsefulStrategies.isEmpty();
 		case EcaPackage.ADAPTATION_SESSION__ACTIVE:
 			return active != ACTIVE_EDEFAULT;
 		case EcaPackage.ADAPTATION_SESSION__ID:

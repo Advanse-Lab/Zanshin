@@ -64,6 +64,12 @@ public class SimulatedTargetSystem implements ITargetSystem {
 		log.info("Simulated target system received EvoReq operation from Zanshin: disable({0}) [from now on]", reqClassName); //$NON-NLS-1$
 	}
 
+	/** @see it.unitn.disi.zanshin.remote.ITargetSystem#doNothing(java.lang.Long) */
+	@Override
+	public void doNothing(Long sessionId) {
+		log.info("Simulated target system received EvoReq operation from Zanshin: do-nothing() [session: {0}]", sessionId); //$NON-NLS-1$
+	}
+
 	/** @see it.unitn.disi.zanshin.remote.ITargetSystem#enable(java.lang.String) */
 	@Override
 	public void enable(String reqClassName) {

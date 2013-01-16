@@ -2,15 +2,18 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="znn" nsURI="http://disi.unitn.it/zanshin/1.0/znn" nsPrefix="znn">
   <eClassifiers xsi:type="ecore:EClass" name="ZnnGoalModel" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//GoalModel"/>
-  <eClassifiers xsi:type="ecore:EClass" name="G_ServeNews" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Goal"/>
-  <eClassifiers xsi:type="ecore:EClass" name="T_TextOnly" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Task"/>
-  <eClassifiers xsi:type="ecore:EClass" name="T_Multimedia" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="G_RunPortal" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Goal"/>
   <eClassifiers xsi:type="ecore:EClass" name="S_CostEfficiency" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Softgoal"/>
   <eClassifiers xsi:type="ecore:EClass" name="Q_SingleServer" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//QualityConstraint"/>
-  <eClassifiers xsi:type="ecore:EClass" name="S_FastResponse" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Softgoal"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Q_RespTimeUnderMax" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//QualityConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Q_RespTimeOverMin" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//QualityConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="G_ServeNews" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Goal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="T_TextOnly" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="T_ServeLowRes" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="T_ServeHighRes" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Task"/>
   <eClassifiers xsi:type="ecore:EClass" name="S_HiFi" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Softgoal"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Q_Multimedia" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//QualityConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Q_HighResolution" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//QualityConstraint"/>
+  <eClassifiers xsi:type="ecore:EClass" name="S_HighPerformance" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//Softgoal"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Q_RespTimeUnderMax" eSuperTypes="http://disi.unitn.it/zanshin/1.0/gore#//QualityConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="AR1" eSuperTypes="http://disi.unitn.it/zanshin/1.0/eca#//EcaAwReq"/>
   <eClassifiers xsi:type="ecore:EClass" name="AR2" eSuperTypes="http://disi.unitn.it/zanshin/1.0/eca#//EcaAwReq"/>
   <eClassifiers xsi:type="ecore:EClass" name="AR3" eSuperTypes="http://disi.unitn.it/zanshin/1.0/eca#//EcaAwReq"/>

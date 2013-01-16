@@ -40,6 +40,8 @@
         eOpposite="#//EcaAwReq/strategies"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="#//ApplicabilityCondition"
         containment="true" eOpposite="#//ApplicabilityCondition/strategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useful" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ApplicabilityCondition" abstract="true">
     <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -48,8 +50,15 @@
       </eAnnotations>
       <eParameters name="session" eType="#//AdaptationSession"/>
     </eOperations>
+    <eOperations name="findStrategy" eType="#//AdaptationStrategy">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="// First, check if this condition was specified directly under the strategy.&#xA;AdaptationStrategy strategy = getStrategy();&#xA;if (strategy != null)&#xA;&#x9;return strategy;&#xA;&#xA;// Checks if this condition is the child of a refined condition, delegating to the parent.&#xA;RefinedApplicabilityCondition parentCondition = getParentCondition();&#xA;if (parentCondition != null)&#xA;&#x9;return parentCondition.findStrategy();&#xA;&#xA;// If none of the above worked, log a warning and return null.&#xA;String conditionName = eClass().getName();&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Couldn't find the strategy associated with condition of class {0}.&quot;, conditionName); //$NON-NLS-1$&#xA;return null;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="strategy" eType="#//AdaptationStrategy"
         eOpposite="#//AdaptationStrategy/condition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentCondition" eType="#//RefinedApplicabilityCondition"
+        eOpposite="#//RefinedApplicabilityCondition/children"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
     <eStructuralFeatures xsi:type="ecore:EReference" name="session" eType="#//AdaptationSession"
@@ -58,9 +67,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="time" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AdaptationSession">
-    <eOperations name="addEvent">
+    <eOperations name="addEvent" eType="#//Event">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="// Creates a new event with the current date/time, associated with the given AwReq, and adds it to the timeline.&#xA;it.unitn.disi.zanshin.model.eca.Event event = it.unitn.disi.zanshin.model.eca.EcaFactory.eINSTANCE.createEvent();&#xA;event.setTime(new java.util.Date(System.currentTimeMillis()));&#xA;event.setAwReq(awreq);&#xA;getEvents().add(event);&#xA;&#xA;// If this is the first event of the session, produce its id.&#xA;if (getEvents().size() == 1) {&#xA;&#x9;StringBuilder builder = new StringBuilder();&#xA;&#x9;java.text.DateFormat dateFormat = new java.text.SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;); //$NON-NLS-1$&#xA;&#x9;builder.append(&quot;(Session: &quot;).append(awreq.eClass().getName()); //$NON-NLS-1$&#xA;&#x9;builder.append(&quot; / &quot;).append(dateFormat.format(event.getTime())).append(&quot;)&quot;); //$NON-NLS-1$ //$NON-NLS-2$&#xA;&#x9;setId(builder.toString());&#xA;}"/>
+        <details key="body" value="// Creates a new event with the current date/time, associated with the given AwReq, and adds it to the timeline.&#xA;it.unitn.disi.zanshin.model.eca.Event event = it.unitn.disi.zanshin.model.eca.EcaFactory.eINSTANCE.createEvent();&#xA;event.setTime(new java.util.Date(System.currentTimeMillis()));&#xA;event.setAwReq(awreq);&#xA;getEvents().add(event);&#xA;&#xA;// If this is the first event of the session, produce its id.&#xA;if (getEvents().size() == 1) {&#xA;&#x9;StringBuilder builder = new StringBuilder();&#xA;&#x9;java.text.DateFormat dateFormat = new java.text.SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss.SSS&quot;); //$NON-NLS-1$&#xA;&#x9;builder.append(&quot;(Session: &quot;).append(awreq.eClass().getName()); //$NON-NLS-1$&#xA;&#x9;builder.append(&quot; / &quot;).append(dateFormat.format(event.getTime())).append(&quot;)&quot;); //$NON-NLS-1$ //$NON-NLS-2$&#xA;&#x9;setId(builder.toString());&#xA;}&#xA;&#xA;return event;"/>
       </eAnnotations>
       <eParameters name="awreq" eType="#//EcaAwReq"/>
     </eOperations>
@@ -71,6 +80,8 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
         eType="#//Event" containment="true" eOpposite="#//Event/session"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eventsWithUsefulStrategies"
+        upperBound="-1" eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="active" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -114,31 +125,68 @@
       eSuperTypes="#//ApplicabilityCondition">
     <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="String conditionName = eClass().getName();&#xA;EClass strategyClass = getStrategy().eClass();&#xA;&#xA;// Attribute maxExecutions is mandatory.&#xA;if (maxExecutions == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Applicability Condition {0} is missing mandatory attribute \&quot;maxExecutions\&quot; and, thus, will be evaluated to false.&quot;, conditionName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Count the number of times this strategy has already been applied in this adaptation session.&#xA;int count = 0;&#xA;for (it.unitn.disi.zanshin.model.eca.Event event : session.getEvents()) {&#xA;&#x9;it.unitn.disi.zanshin.model.eca.AdaptationStrategy strategy = event.getAwReq().getSelectedStrategy();&#xA;&#x9;if ((strategy != null) &amp;&amp; (strategy.eClass().equals(strategyClass))) count++;&#xA;}&#xA;&#xA;// If this number is equal or greater than the limit, do not apply it again.&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Strategy {1} {2,choice,0#is not applicable because it has been applied at least {3} time(s) this session|0&lt;is applicable}.&quot;, session.getId(), strategyClass.getName(), maxExecutions - count, maxExecutions); //$NON-NLS-1$&#xA;return (count &lt; maxExecutions);"/>
+        <details key="body" value="String conditionName = eClass().getName();&#xA;EClass strategyClass = findStrategy().eClass();&#xA;&#xA;// Attribute maxExecutions is mandatory.&#xA;if (maxExecutions == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Applicability Condition {0} is missing mandatory attribute \&quot;maxExecutions\&quot; and, thus, will be evaluated to false.&quot;, conditionName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Count the number of times this strategy has already been applied in this adaptation session.&#xA;int count = 0;&#xA;for (it.unitn.disi.zanshin.model.eca.Event event : session.getEvents()) {&#xA;&#x9;it.unitn.disi.zanshin.model.eca.AdaptationStrategy strategy = event.getAwReq().getSelectedStrategy();&#xA;&#x9;if ((strategy != null) &amp;&amp; (strategy.eClass().equals(strategyClass))) count++;&#xA;}&#xA;&#xA;// If this number is equal or greater than the limit, do not apply it again.&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Strategy {1} {2,choice,0#is not applicable because it has been applied at least {3} time(s) this session|0&lt;is applicable}.&quot;, session.getId(), strategyClass.getName(), maxExecutions - count, maxExecutions); //$NON-NLS-1$&#xA;return (count &lt; maxExecutions);"/>
       </eAnnotations>
       <eParameters name="session" eType="#//AdaptationSession"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxExecutions" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AndRefinedApplicabilityCondition" eSuperTypes="#//ApplicabilityCondition">
+  <eClassifiers xsi:type="ecore:EClass" name="RefinedApplicabilityCondition" eSuperTypes="#//ApplicabilityCondition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//ApplicabilityCondition" containment="true" eOpposite="#//ApplicabilityCondition/parentCondition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AndRefinedApplicabilityCondition" eSuperTypes="#//RefinedApplicabilityCondition">
     <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="// The problem is solved if all children evaluate to true, i.e., if any of them is false, it is not solved.&#xA;for (it.unitn.disi.zanshin.model.eca.ApplicabilityCondition condition : getChildren())&#xA;&#x9;if (! condition.evaluate(session)) return false;&#xA;&#xA;// If none of them were false, then the problem is solved.&#xA;return true;"/>
       </eAnnotations>
       <eParameters name="session" eType="#//AdaptationSession"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//ApplicabilityCondition" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OrRefinedApplicabilityCondition" eSuperTypes="#//ApplicabilityCondition">
+  <eClassifiers xsi:type="ecore:EClass" name="OrRefinedApplicabilityCondition" eSuperTypes="#//RefinedApplicabilityCondition">
     <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="body" value="// The problem is solved if any child evaluates to true.&#xA;for (it.unitn.disi.zanshin.model.eca.ApplicabilityCondition condition : getChildren())&#xA;&#x9;if (condition.evaluate(session)) return true;&#xA;&#xA;// If none of them were true, then the problem is not solved.&#xA;return false;"/>
       </eAnnotations>
       <eParameters name="session" eType="#//AdaptationSession"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
-        eType="#//ApplicabilityCondition" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotConcurrentWithApplicabilityCondition"
+      eSuperTypes="#//ApplicabilityCondition">
+    <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="String conditionName = eClass().getName();&#xA;&#xA;// Obtains a reference to the adaptation service and checks if it exists (if it has been registered).&#xA;it.unitn.disi.zanshin.services.IAdaptationService adaptationService = it.unitn.disi.zanshin.core.Activator.getAdaptationService();&#xA;if (adaptationService == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Attempting to evaluate {0}, but the adaptation service has not yet been registered!&quot;, conditionName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Obtains the map of active sessions.&#xA;Map&lt;EClass, AdaptationSession> activeSessions = adaptationService.getActiveSessions();&#xA;&#xA;// If no specific AwReq was specified, the strategy is applicable only when there are no current active sessions.&#xA;if ((awreqs == null) || (awreqs.isEmpty()))&#xA;&#x9;return activeSessions.isEmpty();&#xA;&#xA;// If specific AwReq(s) have been given, check if there are any active sessions associated to them. If there are,&#xA;// the strategy is not applicable.&#xA;for (AwReq awreq : awreqs) {&#xA;&#x9;if (activeSessions.containsKey(awreq.eClass()))&#xA;&#x9;&#x9;return false;&#xA;}&#xA;&#xA;// If none of the specified AwReqs have an active session, the strategy is applicable.&#xA;return true;"/>
+      </eAnnotations>
+      <eParameters name="session" eType="#//AdaptationSession"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="awreqs" upperBound="-1"
+        eType="ecore:EClass gore.ecore#//AwReq"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderInRangeApplicabilityCondition"
+      eSuperTypes="#//ApplicabilityCondition">
+    <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="EClass strategyClass = findStrategy().eClass();&#xA;&#xA;// Finds out the order of the strategy that will be applied.&#xA;int order = session.getEventsWithUsefulStrategies().size() + 1;&#xA;&#xA;// Checks that this number is within bounds, inclusive.&#xA;boolean result = (lowerBound &lt;= order) &amp;&amp; (upperBound >= order);&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Strategy {1} is {2,choice,1#1st|2#2nd|2&lt;3rd} useful strategy. Bounds are [{3}, {4}]. Applicable? {5}&quot;, session.getId(), strategyClass.getName(), order, lowerBound, upperBound, result); //$NON-NLS-1$&#xA;return result;"/>
+      </eAnnotations>
+      <eParameters name="session" eType="#//AdaptationSession"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FollowsSpecificStrategyApplicabilityCondition"
+      eSuperTypes="#//ApplicabilityCondition">
+    <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="String conditionName = eClass().getName();&#xA;EClass strategyClass = findStrategy().eClass();&#xA;&#xA;// If the list of events with usefult strategies is empty, then the strategy is not applicable.&#xA;org.eclipse.emf.common.util.EList&lt;it.unitn.disi.zanshin.model.eca.Event> eventList = session.getEventsWithUsefulStrategies();&#xA;if (eventList.isEmpty()) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Strategy {1} is not applicable, as it is the first useful strategy applied.&quot;, session.getId(), strategyClass.getName()); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Either minDelay or maxDelay have to be specified.&#xA;if ((minDelay &lt; 0) &amp;&amp; (maxDelay &lt; 0)) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Applicability Condition {0} should have either \&quot;minDelay\&quot; or \&quot;maxDelay\&quot; or both specified. Since it doesn't, it will be evaluated to false.&quot;, conditionName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Checks if the last strategy applied was of the type specified.&#xA;it.unitn.disi.zanshin.model.eca.Event awreqEvent = eventList.get(eventList.size() - 1);&#xA;it.unitn.disi.zanshin.model.eca.AdaptationStrategy lastAppliedStrategy = awreqEvent.getAwReq().getSelectedStrategy();&#xA;org.eclipse.emf.ecore.EClass followClazz = strategyToFollow.eClass();&#xA;org.eclipse.emf.ecore.EClass lastClazz = lastAppliedStrategy.eClass();&#xA;if (!followClazz.equals(lastClazz)) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Strategy {1} is not applicable: should follow {2}, but last useful strategy was {3}.&quot;, session.getId(), strategyClass.getName(), followClazz.getName(), lastClazz.getName()); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Checks if the strategy was applied within the specified minimum and maximum delay.&#xA;long timestamp = awreqEvent.getTime().getTime();&#xA;long diff = System.currentTimeMillis() - timestamp;&#xA;boolean result = ((minDelay == -1) || (diff >= minDelay)) &amp;&amp; ((maxDelay == -1) || (diff &lt;= maxDelay));&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Strategy {1} follows {2}, delay is {3}, should be within [{4}, {5}]. Applicable? {6}&quot;, session.getId(), strategyClass.getName(), lastClazz.getName(), diff, minDelay, maxDelay, result); //$NON-NLS-1$&#xA;return result;"/>
+      </eAnnotations>
+      <eParameters name="session" eType="#//AdaptationSession"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="strategyToFollow" lowerBound="1"
+        eType="#//AdaptationStrategy"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minDelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        defaultValueLiteral="-1"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="maxDelay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        defaultValueLiteral="-1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbortStrategy" eSuperTypes="#//AdaptationStrategy">
     <eOperations name="execute">
@@ -243,15 +291,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="actor" eType="ecore:EClass gore.ecore#//Actor"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReconfigurationApplicabilityCondition"
-      eSuperTypes="#//ApplicabilityCondition">
+      eSuperTypes="#//RefinedApplicabilityCondition">
     <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="// If the wrapped resolution condition wasn't specified, it defaults to a SimpleApplicabilityCondition.&#xA;if (wrappedCondition == null)&#xA;&#x9;wrappedCondition = it.unitn.disi.zanshin.model.eca.EcaFactory.eINSTANCE.createSimpleApplicabilityCondition();&#xA;&#xA;// Retrieves the reconfiguration strategy.&#xA;it.unitn.disi.zanshin.model.eca.AdaptationStrategy strategy = getStrategy();&#xA;String strategyName = strategy.eClass().getName();&#xA;if (!(strategy instanceof it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy)) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;The Reconfiguration Applicability Condition was used with a {0}, but it can only be used with a Reconfiguration Strategy.&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Attribute algorithmId is mandatory.&#xA;it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy reconfigStrategy = (it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy) strategy;&#xA;String algorithmId = reconfigStrategy.getAlgorithmId();&#xA;if (algorithmId == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Strategy {0} is missing mandatory attribute \&quot;algorithmId\&quot; and cannot have its applicability evaluated.&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Obtains a reference to the reconfiguration service and checks if it exists (if it has been registered).&#xA;it.unitn.disi.zanshin.services.IReconfigurationService reconfigService = it.unitn.disi.zanshin.core.Activator.retrieveReconfigurationService(algorithmId);&#xA;if (reconfigService == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Attempting to evaluate the applicability of {0}, but an algorithm with id \&quot;{1}\&quot; is not registered!&quot;, strategyName, algorithmId); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// If all is well so far, delegate the applicability evaluation to the reconfiguration service.&#xA;return reconfigService.checkApplicability(reconfigStrategy.getProcedureIds(), reconfigStrategy.getAwReq(), session, wrappedCondition);"/>
+        <details key="body" value="// Retrieves the reconfiguration strategy.&#xA;it.unitn.disi.zanshin.model.eca.AdaptationStrategy strategy = findStrategy();&#xA;String strategyName = strategy.eClass().getName();&#xA;if (!(strategy instanceof it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy)) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;The Reconfiguration Applicability Condition was used with a {0}, but it can only be used with a Reconfiguration Strategy.&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Attribute algorithmId is mandatory.&#xA;it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy reconfigStrategy = (it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy) strategy;&#xA;String algorithmId = reconfigStrategy.getAlgorithmId();&#xA;if (algorithmId == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Strategy {0} is missing mandatory attribute \&quot;algorithmId\&quot; and cannot have its applicability evaluated.&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// Obtains a reference to the reconfiguration service and checks if it exists (if it has been registered).&#xA;it.unitn.disi.zanshin.services.IReconfigurationService reconfigService = it.unitn.disi.zanshin.core.Activator.retrieveReconfigurationService(algorithmId);&#xA;if (reconfigService == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Attempting to evaluate the applicability of {0}, but an algorithm with id \&quot;{1}\&quot; is not registered!&quot;, strategyName, algorithmId); //$NON-NLS-1$&#xA;&#x9;return false;&#xA;}&#xA;&#xA;// If all is well so far, delegate the applicability evaluation to the reconfiguration service.&#xA;return reconfigService.checkApplicability(reconfigStrategy.getProcedureIds(), reconfigStrategy.getAwReq(), session, getChildren());"/>
       </eAnnotations>
       <eParameters name="session" eType="#//AdaptationSession"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="wrappedCondition" eType="#//ApplicabilityCondition"
-        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReconfigurationResolutionCondition"
       eSuperTypes="#//ResolutionCondition">
@@ -292,5 +338,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="ParameterChange">
     <eStructuralFeatures xsi:type="ecore:EReference" name="param" lowerBound="1" eType="ecore:EClass gore.ecore#//Parameter"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DoNothingStrategy" eSuperTypes="#//AdaptationStrategy">
+    <eOperations name="execute">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="String strategyName = eClass().getName();&#xA;&#xA;// Obtains a reference to the target system's controller and checks if it exists (if it has been registered).&#xA;it.unitn.disi.zanshin.services.ITargetSystemControllerService controller = it.unitn.disi.zanshin.core.Activator.getControllerService();&#xA;if (controller == null) {&#xA;&#x9;it.unitn.disi.zanshin.core.CoreUtils.log.warn(&quot;Attempting to apply {0}, but the target system's controller has not yet been registered!&quot;, strategyName); //$NON-NLS-1$&#xA;&#x9;return;&#xA;}&#xA;&#xA;// Executes the DoNothing strategy.&#xA;it.unitn.disi.zanshin.core.CoreUtils.log.info(&quot;{0} Applying strategy {1}...&quot;, session.getId(), strategyName); //$NON-NLS-1$&#xA;it.unitn.disi.zanshin.model.gore.AwReq awreq = getAwReq();&#xA;it.unitn.disi.zanshin.model.gore.GoalModel goalModel = awreq.findGoalModel();&#xA;controller.doNothing(goalModel);&#xA;&#xA;// Sets itself as a useless strategy, so the adaptation component doesn't count it.&#xA;setUseful(false);"/>
+      </eAnnotations>
+      <eParameters name="session" eType="#//AdaptationSession"/>
+    </eOperations>
   </eClassifiers>
 </ecore:EPackage>

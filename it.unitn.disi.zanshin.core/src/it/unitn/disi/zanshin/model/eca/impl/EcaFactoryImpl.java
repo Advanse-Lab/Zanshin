@@ -12,17 +12,22 @@ import it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
+import it.unitn.disi.zanshin.model.eca.DoNothingStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaFactory;
 import it.unitn.disi.zanshin.model.eca.EcaPackage;
 import it.unitn.disi.zanshin.model.eca.Event;
+import it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
+import it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
+import it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.RelaxDisableChildStrategy;
 import it.unitn.disi.zanshin.model.eca.RelaxReplace;
 import it.unitn.disi.zanshin.model.eca.RetryStrategy;
@@ -93,10 +98,18 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 			return createSimpleApplicabilityCondition();
 		case EcaPackage.MAX_EXECUTIONS_PER_SESSION_APPLICABILITY_CONDITION:
 			return createMaxExecutionsPerSessionApplicabilityCondition();
+		case EcaPackage.REFINED_APPLICABILITY_CONDITION:
+			return createRefinedApplicabilityCondition();
 		case EcaPackage.AND_REFINED_APPLICABILITY_CONDITION:
 			return createAndRefinedApplicabilityCondition();
 		case EcaPackage.OR_REFINED_APPLICABILITY_CONDITION:
 			return createOrRefinedApplicabilityCondition();
+		case EcaPackage.NOT_CONCURRENT_WITH_APPLICABILITY_CONDITION:
+			return createNotConcurrentWithApplicabilityCondition();
+		case EcaPackage.ORDER_IN_RANGE_APPLICABILITY_CONDITION:
+			return createOrderInRangeApplicabilityCondition();
+		case EcaPackage.FOLLOWS_SPECIFIC_STRATEGY_APPLICABILITY_CONDITION:
+			return createFollowsSpecificStrategyApplicabilityCondition();
 		case EcaPackage.ABORT_STRATEGY:
 			return createAbortStrategy();
 		case EcaPackage.DELEGATE_STRATEGY:
@@ -123,6 +136,8 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 			return createChangeParameterStrategy();
 		case EcaPackage.PARAMETER_CHANGE:
 			return createParameterChange();
+		case EcaPackage.DO_NOTHING_STRATEGY:
+			return createDoNothingStrategy();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
@@ -213,6 +228,16 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 	 * 
 	 * @generated
 	 */
+	public RefinedApplicabilityCondition createRefinedApplicabilityCondition() {
+		RefinedApplicabilityConditionImpl refinedApplicabilityCondition = new RefinedApplicabilityConditionImpl();
+		return refinedApplicabilityCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
 	public AndRefinedApplicabilityCondition createAndRefinedApplicabilityCondition() {
 		AndRefinedApplicabilityConditionImpl andRefinedApplicabilityCondition = new AndRefinedApplicabilityConditionImpl();
 		return andRefinedApplicabilityCondition;
@@ -226,6 +251,36 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 	public OrRefinedApplicabilityCondition createOrRefinedApplicabilityCondition() {
 		OrRefinedApplicabilityConditionImpl orRefinedApplicabilityCondition = new OrRefinedApplicabilityConditionImpl();
 		return orRefinedApplicabilityCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public NotConcurrentWithApplicabilityCondition createNotConcurrentWithApplicabilityCondition() {
+		NotConcurrentWithApplicabilityConditionImpl notConcurrentWithApplicabilityCondition = new NotConcurrentWithApplicabilityConditionImpl();
+		return notConcurrentWithApplicabilityCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public OrderInRangeApplicabilityCondition createOrderInRangeApplicabilityCondition() {
+		OrderInRangeApplicabilityConditionImpl orderInRangeApplicabilityCondition = new OrderInRangeApplicabilityConditionImpl();
+		return orderInRangeApplicabilityCondition;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public FollowsSpecificStrategyApplicabilityCondition createFollowsSpecificStrategyApplicabilityCondition() {
+		FollowsSpecificStrategyApplicabilityConditionImpl followsSpecificStrategyApplicabilityCondition = new FollowsSpecificStrategyApplicabilityConditionImpl();
+		return followsSpecificStrategyApplicabilityCondition;
 	}
 
 	/**
@@ -306,6 +361,16 @@ public class EcaFactoryImpl extends EFactoryImpl implements EcaFactory {
 	public ParameterChange createParameterChange() {
 		ParameterChangeImpl parameterChange = new ParameterChangeImpl();
 		return parameterChange;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public DoNothingStrategy createDoNothingStrategy() {
+		DoNothingStrategyImpl doNothingStrategy = new DoNothingStrategyImpl();
+		return doNothingStrategy;
 	}
 
 	/**

@@ -12,6 +12,7 @@ public enum AdaptationInstruction {
 	CHANGE_PARAMETER,
 	COPY_DATA,
 	DISABLE,
+	DO_NOTHING,
 	ENABLE,
 	INITIATE,
 	RESUME,

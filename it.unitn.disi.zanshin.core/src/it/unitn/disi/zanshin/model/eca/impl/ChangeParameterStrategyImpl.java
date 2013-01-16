@@ -117,34 +117,34 @@ public class ChangeParameterStrategyImpl extends AdaptationStrategyImpl implemen
 	 */
 	public void execute(AdaptationSession session) {
 		String strategyName = eClass().getName();
-		
+
 		// Obtains a reference to the target system's controller and checks if it exists (if it has been registered).
 		it.unitn.disi.zanshin.services.ITargetSystemControllerService controller = it.unitn.disi.zanshin.core.Activator.getControllerService();
 		if (controller == null) {
 			it.unitn.disi.zanshin.core.CoreUtils.log.warn("Attempting to apply {0}, but the target system's controller has not yet been registered!", strategyName); //$NON-NLS-1$
 			return;
 		}
-		
+
 		// Retrieve the strategy's attributes.
 		it.unitn.disi.zanshin.model.eca.EcaAwReq awreq = getAwReq();
-		
+
 		// At least one change should be given.
 		if ((changes == null) || (changes.isEmpty())) {
 			it.unitn.disi.zanshin.core.CoreUtils.log.warn("Strategy {0} is missing mandatory attribute \"changes\" and cannot be executed.", strategyName); //$NON-NLS-1$
 			return;
 		}
-		
+
 		// Attribute level defaults to CLASS.
 		if (level == null)
 			level = AggregationLevel.CLASS;
-		
+
 		// Generates the name of the strategy with the changes that should be done.
 		StringBuilder builder = new StringBuilder(strategyName).append('(');
 		for (ParameterChange change : changes)
 			builder.append(change.getParam().eClass().getName()).append(" -> ").append(change.getValue()).append(", "); //$NON-NLS-1$ //$NON-NLS-2$
 		builder.delete(builder.length() - 2, builder.length()).append(')');
 		strategyName = builder.toString();
-		
+
 		// Executes the ChangeParameter strategy.
 		it.unitn.disi.zanshin.core.CoreUtils.log.info("{0} Applying strategy {1}...", session.getId(), strategyName); //$NON-NLS-1$
 		if ((level == AggregationLevel.CLASS) || (level == AggregationLevel.BOTH)) {

@@ -14,16 +14,21 @@ import it.unitn.disi.zanshin.model.eca.AndRefinedResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ChangeParameterStrategy;
 import it.unitn.disi.zanshin.model.eca.DelegateStrategy;
+import it.unitn.disi.zanshin.model.eca.DoNothingStrategy;
 import it.unitn.disi.zanshin.model.eca.EcaAwReq;
 import it.unitn.disi.zanshin.model.eca.EcaPackage;
 import it.unitn.disi.zanshin.model.eca.Event;
+import it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.MaxExecutionsPerSessionApplicabilityCondition;
+import it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.OrRefinedResolutionCondition;
+import it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ParameterChange;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationResolutionCondition;
 import it.unitn.disi.zanshin.model.eca.ReconfigurationStrategy;
+import it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition;
 import it.unitn.disi.zanshin.model.eca.RelaxDisableChildStrategy;
 import it.unitn.disi.zanshin.model.eca.RelaxReplace;
 import it.unitn.disi.zanshin.model.eca.ResolutionCondition;
@@ -146,6 +151,11 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseRefinedApplicabilityCondition(RefinedApplicabilityCondition object) {
+			return createRefinedApplicabilityConditionAdapter();
+		}
+
+		@Override
 		public Adapter caseAndRefinedApplicabilityCondition(AndRefinedApplicabilityCondition object) {
 			return createAndRefinedApplicabilityConditionAdapter();
 		}
@@ -153,6 +163,21 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseOrRefinedApplicabilityCondition(OrRefinedApplicabilityCondition object) {
 			return createOrRefinedApplicabilityConditionAdapter();
+		}
+
+		@Override
+		public Adapter caseNotConcurrentWithApplicabilityCondition(NotConcurrentWithApplicabilityCondition object) {
+			return createNotConcurrentWithApplicabilityConditionAdapter();
+		}
+
+		@Override
+		public Adapter caseOrderInRangeApplicabilityCondition(OrderInRangeApplicabilityCondition object) {
+			return createOrderInRangeApplicabilityConditionAdapter();
+		}
+
+		@Override
+		public Adapter caseFollowsSpecificStrategyApplicabilityCondition(FollowsSpecificStrategyApplicabilityCondition object) {
+			return createFollowsSpecificStrategyApplicabilityConditionAdapter();
 		}
 
 		@Override
@@ -218,6 +243,11 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseParameterChange(ParameterChange object) {
 			return createParameterChangeAdapter();
+		}
+
+		@Override
+		public Adapter caseDoNothingStrategy(DoNothingStrategy object) {
+			return createDoNothingStrategyAdapter();
 		}
 
 		@Override
@@ -413,6 +443,20 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition
+	 * <em>Refined Applicability Condition</em>}'. <!-- begin-user-doc --> This default implementation returns null so
+	 * that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.RefinedApplicabilityCondition
+	 * @generated
+	 */
+	public Adapter createRefinedApplicabilityConditionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '
 	 * {@link it.unitn.disi.zanshin.model.eca.AndRefinedApplicabilityCondition
 	 * <em>And Refined Applicability Condition</em>}'. <!-- begin-user-doc --> This default implementation returns null so
@@ -438,6 +482,51 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOrRefinedApplicabilityConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition
+	 * <em>Not Concurrent With Applicability Condition</em>}'. <!-- begin-user-doc --> This default implementation returns
+	 * null so that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases
+	 * anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.NotConcurrentWithApplicabilityCondition
+	 * @generated
+	 */
+	public Adapter createNotConcurrentWithApplicabilityConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition
+	 * <em>Order In Range Applicability Condition</em>}'. <!-- begin-user-doc --> This default implementation returns null
+	 * so that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.OrderInRangeApplicabilityCondition
+	 * @generated
+	 */
+	public Adapter createOrderInRangeApplicabilityConditionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '
+	 * {@link it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition
+	 * <em>Follows Specific Strategy Applicability Condition</em>}'. <!-- begin-user-doc --> This default implementation
+	 * returns null so that we can easily ignore cases; it's useful to ignore a case when inheritance will catch all the
+	 * cases anyway. <!-- end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.FollowsSpecificStrategyApplicabilityCondition
+	 * @generated
+	 */
+	public Adapter createFollowsSpecificStrategyApplicabilityConditionAdapter() {
 		return null;
 	}
 
@@ -548,6 +637,20 @@ public class EcaAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterChangeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link it.unitn.disi.zanshin.model.eca.DoNothingStrategy
+	 * <em>Do Nothing Strategy</em>}'. <!-- begin-user-doc --> This default implementation returns null so that we can
+	 * easily ignore cases; it's useful to ignore a case when inheritance will catch all the cases anyway. <!--
+	 * end-user-doc -->
+	 * 
+	 * @return the new adapter.
+	 * @see it.unitn.disi.zanshin.model.eca.DoNothingStrategy
+	 * @generated
+	 */
+	public Adapter createDoNothingStrategyAdapter() {
 		return null;
 	}
 

@@ -54,10 +54,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="#//DefinableRequirementState"
         defaultValueLiteral="undefined"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Softgoal" eSuperTypes="#//Requirement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-        eType="#//QualityConstraint" eOpposite="#//QualityConstraint/softgoal"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Softgoal" eSuperTypes="#//Goal"/>
   <eClassifiers xsi:type="ecore:EClass" name="PerformativeRequirement" eSuperTypes="#//DefinableRequirement">
     <eOperations name="cancel">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -71,16 +68,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QualityConstraint" eSuperTypes="#//DefinableRequirement">
-    <eOperations name="replaceWith">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="body" value="// Performs the replacement as a normal requirement first.&#xA;super.replaceWith(newRequirement);&#xA;&#xA;// Then, replace the relationship quality constraints have with softgoals.&#xA;it.unitn.disi.zanshin.model.gore.Softgoal softgoal = getSoftgoal();&#xA;setSoftgoal(null);&#xA;((QualityConstraint) newRequirement).setSoftgoal(softgoal);"/>
-      </eAnnotations>
-      <eParameters name="newRequirement" eType="#//Requirement"/>
-    </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="softgoal" lowerBound="1"
-        eType="#//Softgoal" eOpposite="#//Softgoal/constraints"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QualityConstraint" eSuperTypes="#//DefinableRequirement"/>
   <eClassifiers xsi:type="ecore:EClass" name="AwReq" eSuperTypes="#//DefinableRequirement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="otherTargets" upperBound="-1"
         eType="#//DefinableRequirement"/>

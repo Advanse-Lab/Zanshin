@@ -95,7 +95,7 @@ public class MaxExecutionsPerSessionApplicabilityConditionImpl extends Applicabi
 	 */
 	public boolean evaluate(AdaptationSession session) {
 		String conditionName = eClass().getName();
-		EClass strategyClass = getStrategy().eClass();
+		EClass strategyClass = findStrategy().eClass();
 
 		// Attribute maxExecutions is mandatory.
 		if (maxExecutions == null) {

@@ -85,6 +85,33 @@ public interface AdaptationStrategy extends EObject {
 	void setCondition(ApplicabilityCondition value);
 
 	/**
+	 * Returns the value of the '<em><b>Useful</b></em>' attribute. The default value is <code>"true"</code>. <!--
+	 * begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Useful</em>' attribute isn't clear, there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * 
+	 * @return the value of the '<em>Useful</em>' attribute.
+	 * @see #setUseful(boolean)
+	 * @see it.unitn.disi.zanshin.model.eca.EcaPackage#getAdaptationStrategy_Useful()
+	 * @model default="true"
+	 * @generated
+	 */
+	boolean isUseful();
+
+	/**
+	 * Sets the value of the '{@link it.unitn.disi.zanshin.model.eca.AdaptationStrategy#isUseful <em>Useful</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @param value
+	 *          the new value of the '<em>Useful</em>' attribute.
+	 * @see #isUseful()
+	 * @generated
+	 */
+	void setUseful(boolean value);
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @model annotation=
